@@ -5,6 +5,7 @@
 		id: string;
 		title: string;
 		description: string;
+		image?: string;
 	};
 
 	type CardLinkProps = {
@@ -24,7 +25,7 @@
 
 <svelte:element this={props.variant} class="card" {...props}>
 	<div class="card__head">
-		<img class="card__image" src={`/images/${props.id}.jpg`} alt={props.title} />
+		<img class="card__image" src={props.image ?? `/images/${props.id}.jpg`} alt={props.title} />
 	</div>
 	<p class="card__title">{props.title}</p>
 	<p class="card__description">{props.description}</p>

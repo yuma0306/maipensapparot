@@ -1,10 +1,13 @@
 <script lang="ts">
-	import { situations } from '$lib/data/situations';
+	import type { PageData } from './$types';
 	import CardList from '$lib/components/CardList/CardList.svelte';
 	import { siteData } from '$lib/const/siteData';
 	import Stack from '$lib/components/Stack/Stack.svelte';
 	import Spacer from '$lib/components/Spacer/Spacer.svelte';
 	import CardImage from '$lib/components/CardImage/CardImage.svelte';
+
+	let { data }: { data: PageData } = $props();
+	const situations = $derived(data.situations);
 </script>
 
 <Stack size={2} variant="section">
@@ -20,6 +23,7 @@
 			id={situation.id}
 			title={situation.title}
 			description={situation.description}
+			image={situation.thumbnail}
 		/>
 	{/each}
 </CardList>

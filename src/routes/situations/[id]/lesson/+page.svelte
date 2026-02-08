@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { LessonResult } from '$lib/types';
-	import type { PageProps } from '../$types';
+	import type { PageProps } from './$types';
 	import Stack from '$lib/components/Stack/Stack.svelte';
 	import Spacer from '$lib/components/Spacer/Spacer.svelte';
 
