@@ -18,11 +18,9 @@
 
 <div class="phrase-list">
 	{#each situation.phrases as phrase}
-		<div class="phrase-card">
-			<div class="phrase-header">
-				<span class="thai">{phrase.thai}</span>
-				<button onclick={() => speak(phrase.thai)} aria-label="音声再生">🔊</button>
-			</div>
+		<div>
+			<span class="thai">{phrase.thai}</span>
+			<button onclick={() => speak(phrase.thai)} aria-label="音声再生">🔊</button>
 			<p class="japanese">{phrase.japanese}</p>
 			<div class="words">
 				<h4>単語解説</h4>

@@ -2,9 +2,10 @@ import type { Situation } from '$lib/types';
 
 export const situations: Situation[] = [
 	{
-		id: 'greetings',
-		title: '挨拶',
-		description: '基本的な挨拶のフレーズ',
+		id: 'greeting',
+		title:
+			'挨拶挨拶挨拶挨拶挨拶挨拶挨拶挨拶挨拶挨拶挨拶挨拶挨拶挨拶挨拶挨拶挨拶挨拶挨拶挨拶挨拶挨拶挨拶挨拶',
+		description: '基本的な挨拶のフレーズを集めました。',
 		phrases: [
 			{
 				id: 'g1',
@@ -56,7 +57,7 @@ export const situations: Situation[] = [
 	{
 		id: 'restaurant',
 		title: 'レストラン',
-		description: 'レストランで使えるフレーズ',
+		description: 'レストランやカフェで使える定番フレーズを集めました。',
 		phrases: [
 			{
 				id: 'r1',
@@ -112,7 +113,8 @@ export const situations: Situation[] = [
 	{
 		id: 'transportation',
 		title: '交通',
-		description: '移動時に使えるフレーズ',
+		description:
+			'移動時に使えるフレーズを集めました。移動時に使えるフレーズを集めました。移動時に使えるフレーズを集めました。',
 		phrases: [
 			{
 				id: 't1',
@@ -161,7 +163,7 @@ export const situations: Situation[] = [
 	{
 		id: 'shopping',
 		title: 'ショッピング',
-		description: '買い物で使えるフレーズ',
+		description: '買い物で使えるフレーズを集めました。',
 		phrases: [
 			{
 				id: 's1',

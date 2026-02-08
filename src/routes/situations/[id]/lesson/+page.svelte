@@ -2,12 +2,12 @@
 	import { goto } from '$app/navigation';
 	import { lessonResults } from '$lib/stores';
 	import type { LessonResult } from '$lib/types';
-	import type { PageData } from './$types';
+	import type { PageProps } from '../$types';
 
-	let { data }: { data: PageData } = $props();
-	const { situation } = data;
-	const phrases = situation.phrases;
-	const total = phrases.length;
+	let props: PageProps = $props();
+	const situation = $derived(props.data.situation);
+	const phrases = $derived(situation.phrases);
+	const total = $derived(phrases.length);
 
 	let currentIndex = $state(0);
 	let userInput = $state('');
@@ -64,7 +64,6 @@
 				bind:value={userInput}
 				oninput={handleInput}
 				placeholder="タイ語を入力..."
-				autofocus
 				lang="th"
 			/>
 		</div>

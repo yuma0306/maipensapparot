@@ -1,16 +1,38 @@
 <script lang="ts">
 	import { situations } from '$lib/data/situations';
+	import CardList from '$lib/components/CardList/CardList.svelte';
+	import { siteData } from '$lib/const/siteData';
+	import Stack from '$lib/components/Stack/Stack.svelte';
+	import Spacer from '$lib/components/Spacer/Spacer.svelte';
+	import CardImage from '$lib/components/CardImage/CardImage.svelte';
 </script>
 
-<h1>Learn Thai</h1>
-<p>シチュエーションを選んで学習を始めましょう</p>
-
-<div class="situation-list">
+<Stack size={2} variant="section">
+	<h2 class="heading">{siteData.title}へようこそ</h2>
+	<p class="lead">シチュエーションを選んで学習を始めましょう</p>
+</Stack>
+<Spacer size={3} variant="div" />
+<CardList>
 	{#each situations as situation}
-		<a href="/situations/{situation.id}" class="situation-card">
-			<h2>{situation.title}</h2>
-			<p>{situation.description}</p>
-			<span>{situation.phrases.length} フレーズ</span>
-		</a>
+		<CardImage
+			variant="a"
+			href={`/situations/${situation.id}`}
+			id={situation.id}
+			title={situation.title}
+			description={situation.description}
+		/>
 	{/each}
-</div>
+</CardList>
+
+<style>
+	.heading {
+		font-size: calc(var(--font-size-5) * 1px);
+		text-align: center;
+		font-weight: 700;
+		color: var(--color-secondary);
+	}
+	.lead {
+		font-size: calc(var(--font-size-1) * 1px);
+		text-align: center;
+	}
+</style>
