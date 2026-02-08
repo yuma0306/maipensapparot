@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
-	import { lessonResults } from '$lib/stores';
 	import type { LessonResult } from '$lib/types';
 	import type { PageProps } from '../$types';
 
@@ -16,6 +14,7 @@
 
 	const currentPhrase = $derived(phrases[currentIndex]);
 	const isFinished = $derived(currentIndex >= total);
+	const correctCount = $derived(results.filter((r) => r.correct).length);
 
 	function checkInput() {
 		if (userInput === currentPhrase.thai) {
@@ -35,11 +34,6 @@
 		currentIndex++;
 		userInput = '';
 		isWrong = false;
-
-		if (currentIndex >= total) {
-			lessonResults.set(results);
-			goto(`/situations/${situation.id}/result`);
-		}
 	}
 
 	function handleInput() {
@@ -75,4 +69,31 @@
 
 		<button onclick={skipPhrase} class="skip-button">スキップ（不正解扱い）</button>
 	</div>
+{:else}
+	<h1>結果 — {situation.title}</h1>
+
+	<div class="score">
+		<p>スコア: {correctCount} / {total}</p>
+	</div>
+
+	<div class="result-list">
+		{#each results as result}
+			<div class="result-card">
+				<span class="result-mark">{result.correct ? '⭕' : '❌'}</span>
+				<div class="result-content">
+					<p class="thai">{result.phrase.thai}</p>
+					<p class="japanese">{result.phrase.japanese}</p>
+					<div class="words">
+						<ul>
+							{#each result.phrase.words as word}
+								<li><strong>{word.thai}</strong> — {word.meaning}</li>
+							{/each}
+						</ul>
+					</div>
+				</div>
+			</div>
+		{/each}
+	</div>
+
+	<a href="/situations/{situation.id}" class="back-button">シチュエーション詳細に戻る</a>
 {/if}
