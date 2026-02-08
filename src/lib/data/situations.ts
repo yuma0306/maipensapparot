@@ -3,8 +3,7 @@ import type { Situation } from '$lib/types';
 export const situations: Situation[] = [
 	{
 		id: 'greeting',
-		title:
-			'挨拶挨拶挨拶挨拶挨拶挨拶挨拶挨拶挨拶挨拶挨拶挨拶挨拶挨拶挨拶挨拶挨拶挨拶挨拶挨拶挨拶挨拶挨拶挨拶',
+		title: '挨拶',
 		description: '基本的な挨拶のフレーズを集めました。',
 		phrases: [
 			{

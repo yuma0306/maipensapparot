@@ -1,4 +1,4 @@
-const title = 'タイ文字くん';
+const title = '🍍マイペンサッパロット';
 
 export const siteData = {
 	title
