@@ -1,10 +1,12 @@
 <script lang="ts">
 	import type { HTMLAnchorAttributes, HTMLAttributes } from 'svelte/elements';
+	import type { Situation } from '$lib/types';
 
 	type CommonProps = {
-		id: string;
-		title: string;
-		description: string;
+		id: Situation['id'];
+		title: Situation['title'];
+		description: Situation['description'];
+		thumbnail: Situation['thumbnail'];
 	};
 
 	type CardLinkProps = {
@@ -24,7 +26,13 @@
 
 <svelte:element this={props.variant} class="card" {...props}>
 	<div class="card__head">
-		<img class="card__image" src={`/images/${props.id}.jpg`} alt={props.title} />
+		<img
+			class="card__image"
+			src={props.thumbnail.url}
+			alt={props.title}
+			width={props.thumbnail.width}
+			height={props.thumbnail.height}
+		/>
 	</div>
 	<p class="card__title">{props.title}</p>
 	<p class="card__description">{props.description}</p>
@@ -38,7 +46,7 @@
 		grid-row: span 4;
 		background-color: var(--color-white);
 		border-radius: calc(var(--border-radius) * 1px);
-		box-shadow: var(--shadow);
+		box-shadow: 0 0 calc(var(--spacing-1) * 1px) var(--color-gray);
 		border: 1px solid var(--color-gray);
 		overflow: hidden;
 		&:hover {
@@ -51,17 +59,18 @@
 		overflow: hidden;
 	}
 	.card__image {
-		position: relative;
 		display: block;
 		object-fit: cover;
 		aspect-ratio: 2;
+		height: 100%;
+		width: 100%;
 		transition: scale var(--transition);
 	}
 	.card__title {
 		color: var(--color-secondary);
 		font-weight: bold;
 		font-size: calc(var(--font-size-2) * 1px);
-		padding-inline: calc(var(--spacing-1) * 1px);
+		padding-inline: calc(var(--spacing-2) * 1px);
 		display: -webkit-box;
 		-webkit-line-clamp: 2;
 		-webkit-box-orient: vertical;
@@ -70,7 +79,7 @@
 	.card__description {
 		color: var(--color-primary);
 		font-size: calc(var(--font-size-1) * 1px);
-		padding-inline: calc(var(--spacing-1) * 1px);
+		padding-inline: calc(var(--spacing-2) * 1px);
 		display: -webkit-box;
 		-webkit-line-clamp: 2;
 		-webkit-box-orient: vertical;

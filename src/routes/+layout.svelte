@@ -1,7 +1,7 @@
 <script lang="ts">
-	import '../reset.css';
-	import '../app.css';
-	import favicon from '$lib/assets/favicon.svg';
+	import '$lib/styles/reset.css';
+	import '$lib/styles/app.css';
+	import favicon from '/favicon.svg';
 	import Wrapper from '$lib/components/Wrapper/Wrapper.svelte';
 	import Main from '$lib/components/Main/Main.svelte';
 	import Footer from '$lib/components/Footer/Footer.svelte';
