@@ -51,7 +51,7 @@
 
 * {
 	box-sizing: border-box;
-	color: var(--color-primary);
+	color: var(--color-dark);
 }
 
 body {
