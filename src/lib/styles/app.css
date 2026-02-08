@@ -2,7 +2,6 @@
 	/* カラーパレット */
 	--color-primary: #2d2a4a;
 	--color-primary-10: color-mix(in srgb, var(--color-primary) 10%, #fff);
-	--color-primary-5: color-mix(in srgb, var(--color-primary) 5%, #fff);
 	--color-secondary: #a51931;
 	--color-secondary-10: color-mix(in srgb, var(--color-secondary) 10%, #fff);
 	--color-success: #28a745;
@@ -41,13 +40,13 @@
 	/* animation */
 	--transition: 0.2s ease-in-out;
 	--scale: 1.2;
+	--opacity: 0.8;
 
 	/* 計算用 */
 	--calc-sp: 100vw / 390;
 }
 
 * {
-	box-sizing: border-box;
 	color: var(--color-dark);
 }
 
@@ -57,7 +56,7 @@ body {
 }
 @media (min-width: 640px) {
 	body {
-		font-size: calc(var(--font-size-2) * 1px);
+		font-size: calc(var(--font-size-1) * 1px);
 	}
 }
 @media (max-width: 639px) {

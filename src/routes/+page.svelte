@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { PageData } from './$types';
-	import CardList from '$lib/components/CardList/CardList.svelte';
+	import CardImageList from '$lib/components/CardImageList/CardImageList.svelte';
 	import { siteData } from '$lib/const/siteData';
 	import Stack from '$lib/components/Stack/Stack.svelte';
 	import Spacer from '$lib/components/Spacer/Spacer.svelte';
@@ -15,7 +15,7 @@
 	<p class="lead">シチュエーションを選んで学習を始めましょう</p>
 </Stack>
 <Spacer size={3} variant="div" />
-<CardList>
+<CardImageList>
 	{#each situations as situation}
 		<CardImage
 			variant="a"
@@ -26,7 +26,7 @@
 			thumbnail={situation.thumbnail}
 		/>
 	{/each}
-</CardList>
+</CardImageList>
 
 <style>
 	.heading {
