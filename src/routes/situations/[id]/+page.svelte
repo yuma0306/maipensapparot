@@ -26,13 +26,15 @@
 	<Stack size={2} variant="div">
 		{#each situation.phrases as phrase}
 			<div class="phrase-card">
-				<div class="phrase-header">
-					<span class="thai">{phrase.thai}</span>
-					<button onclick={() => speak(phrase.thai)} class="speak-button" aria-label="音声再生"
-						>🔊</button
-					>
+				<div class="phrase-main">
+					<div class="phrase-header">
+						<span class="thai">{phrase.thai}</span>
+						<button onclick={() => speak(phrase.thai)} class="speak-button" aria-label="音声再生"
+							>🔊</button
+						>
+					</div>
+					<p class="japanese">{phrase.japanese}</p>
 				</div>
-				<p class="japanese">{phrase.japanese}</p>
 				<ul class="word-list">
 					{#each phrase.words as word}
 						<li><strong>{word.thai}</strong> — {word.meaning}</li>
@@ -72,12 +74,23 @@
 	}
 	.phrase-card {
 		display: grid;
-		row-gap: calc(var(--spacing-1) * 1px);
+		row-gap: calc(var(--spacing-2) * 1px);
 		padding: calc(var(--spacing-2) * 1px);
 		background-color: var(--color-white);
 		border-radius: calc(var(--border-radius) * 1px);
 		box-shadow: var(--shadow);
 		border: 1px solid var(--color-gray);
+	}
+	@media (min-width: 640px) {
+		.phrase-card {
+			grid-template-columns: 1fr 1fr;
+			align-items: center;
+			column-gap: 20px;
+		}
+	}
+	.phrase-main {
+		display: grid;
+		row-gap: calc(var(--spacing-1) * 1px);
 	}
 	.phrase-header {
 		display: flex;
@@ -109,6 +122,18 @@
 		padding-left: calc(var(--spacing-2) * 1px);
 		font-size: calc(var(--font-size-1) * 1px);
 		color: var(--color-dark);
+	}
+	@media (min-width: 640px) {
+		.word-list {
+			border-left: 1px solid var(--color-gray);
+			padding-left: calc(var(--spacing-3) * 1px);
+		}
+	}
+	@media (max-width: 639px) {
+		.word-list {
+			border-top: 1px solid var(--color-gray);
+			padding-top: calc(var(--spacing-1) * 1px);
+		}
 	}
 	.start-button {
 		display: block;
