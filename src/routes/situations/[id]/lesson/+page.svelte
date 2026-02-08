@@ -13,6 +13,7 @@
 	let userInput = $state('');
 	let results: LessonResult[] = $state([]);
 	let isWrong = $state(false);
+	let showAnswer = $state(false);
 
 	const currentPhrase = $derived(phrases[currentIndex]);
 	const isFinished = $derived(currentIndex >= total);
@@ -36,6 +37,7 @@
 		currentIndex++;
 		userInput = '';
 		isWrong = false;
+		showAnswer = false;
 	}
 
 	function handleInput() {
@@ -63,9 +65,25 @@
 
 		<div class="question-card">
 			<p class="japanese-prompt">{currentPhrase.japanese}</p>
-			<button onclick={() => speak(currentPhrase.thai)} class="listen-button" aria-label="タイ語の音声を聞く">
-				🔊 発音を聞く
-			</button>
+			<div class="question-actions">
+				<button
+					onclick={() => speak(currentPhrase.thai)}
+					class="listen-button"
+					aria-label="タイ語の音声を聞く"
+				>
+					🔊 発音を聞く
+				</button>
+				<button
+					onclick={() => (showAnswer = !showAnswer)}
+					class="listen-button"
+					aria-label="回答を見る"
+				>
+					{showAnswer ? '🙈 回答を隠す' : '👀 回答を見る'}
+				</button>
+			</div>
+			{#if showAnswer}
+				<p class="answer-text">{currentPhrase.thai}</p>
+			{/if}
 		</div>
 
 		<Stack size={2} variant="div">
@@ -188,6 +206,16 @@
 		box-shadow: var(--shadow);
 		border: 1px solid var(--color-gray);
 		text-align: center;
+	}
+	.question-actions {
+		display: flex;
+		gap: calc(var(--spacing-1) * 1px);
+		justify-content: center;
+		flex-wrap: wrap;
+	}
+	.answer-text {
+		font-size: calc(var(--font-size-3) * 1px);
+		color: var(--color-gray);
 	}
 	.listen-button {
 		padding: calc(var(--spacing-1) * 1px) calc(var(--spacing-2) * 1px);
