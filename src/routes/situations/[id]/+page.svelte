@@ -2,15 +2,13 @@
 	import type { PageData } from './$types';
 	import Stack from '$lib/components/Stack/Stack.svelte';
 	import Spacer from '$lib/components/Spacer/Spacer.svelte';
+	import ListItem from '$lib/components/ListItem/ListItem.svelte';
+	import Typography from '$lib/components/Typography/Typography.svelte';
+	import SpeakButton from '$lib/components/speakButton/speakButton.svelte';
+	import Card from '$lib/components/Card/Card.svelte';
 
 	let { data }: { data: PageData } = $props();
 	const situation = $derived(data.situation);
-
-	function speak(text: string) {
-		const utterance = new SpeechSynthesisUtterance(text);
-		utterance.lang = 'th-TH';
-		speechSynthesis.speak(utterance);
-	}
 </script>
 
 <Stack size={2} variant="section">
@@ -22,25 +20,10 @@
 <Spacer size={3} variant="div" />
 
 <Stack size={2} variant="section">
-	<h2 class="sub-heading">フレーズ一覧</h2>
-	<Stack size={2} variant="div">
+	<Typography size={3} variant="h2" color="primary" weight="bold">フレーズ一覧</Typography>
+	<Stack size={2} variant="ul">
 		{#each situation.phrases as phrase}
-			<div class="phrase-card">
-				<div class="phrase-main">
-					<div class="phrase-header">
-						<span class="thai">{phrase.thai}</span>
-						<button onclick={() => speak(phrase.thai)} class="speak-button" aria-label="音声再生"
-							>🔊</button
-						>
-					</div>
-					<p class="japanese">{phrase.japanese}</p>
-				</div>
-				<ul class="word-list">
-					{#each phrase.words as word}
-						<li><strong>{word.thai}</strong> — {word.meaning}</li>
-					{/each}
-				</ul>
-			</div>
+			<Card {phrase} />
 		{/each}
 	</Stack>
 </Stack>
@@ -66,74 +49,6 @@
 	.description {
 		font-size: calc(var(--font-size-1) * 1px);
 		color: var(--color-dark);
-	}
-	.sub-heading {
-		font-size: calc(var(--font-size-3) * 1px);
-		font-weight: 700;
-		color: var(--color-primary);
-	}
-	.phrase-card {
-		display: grid;
-		row-gap: calc(var(--spacing-2) * 1px);
-		padding: calc(var(--spacing-2) * 1px);
-		background-color: var(--color-white);
-		border-radius: calc(var(--border-radius) * 1px);
-		box-shadow: 0 0 calc(var(--spacing-1) * 1px) var(--color-gray);
-		border: 1px solid var(--color-gray);
-	}
-	@media (min-width: 640px) {
-		.phrase-card {
-			grid-template-columns: 1fr 1fr;
-			align-items: center;
-			column-gap: 20px;
-		}
-	}
-	.phrase-main {
-		display: grid;
-		row-gap: calc(var(--spacing-1) * 1px);
-	}
-	.phrase-header {
-		display: flex;
-		align-items: center;
-		gap: calc(var(--spacing-1) * 1px);
-	}
-	.thai {
-		font-size: calc(var(--font-size-3) * 1px);
-		font-weight: 700;
-		color: var(--color-primary);
-	}
-	.speak-button {
-		background: none;
-		border: 1px solid var(--color-gray);
-		border-radius: calc(var(--border-radius) * 1px);
-		padding: calc(var(--spacing-1) * 0.5px) calc(var(--spacing-1) * 1px);
-		cursor: pointer;
-		transition: background-color var(--transition);
-		&:hover {
-			background-color: var(--color-primary-5);
-		}
-	}
-	.japanese {
-		color: var(--color-dark);
-	}
-	.word-list {
-		display: grid;
-		row-gap: 4px;
-		padding-left: calc(var(--spacing-2) * 1px);
-		font-size: calc(var(--font-size-1) * 1px);
-		color: var(--color-dark);
-	}
-	@media (min-width: 640px) {
-		.word-list {
-			border-left: 1px solid var(--color-gray);
-			padding-left: calc(var(--spacing-3) * 1px);
-		}
-	}
-	@media (max-width: 639px) {
-		.word-list {
-			border-top: 1px solid var(--color-gray);
-			padding-top: calc(var(--spacing-1) * 1px);
-		}
 	}
 	.start-button {
 		display: block;

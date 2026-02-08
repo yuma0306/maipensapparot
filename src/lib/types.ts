@@ -4,7 +4,7 @@ interface Word {
 	meaning: string;
 }
 
-interface Phrase {
+export interface Phrase {
 	fieldId: string;
 	thai: string;
 	japanese: string;

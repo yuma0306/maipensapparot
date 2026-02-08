@@ -4,20 +4,10 @@
 
 	type CommonProps = {
 		size: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+		variant: 'div' | 'ul' | 'section' | 'dl';
 		children: Snippet;
 	};
-
-	type StackDivProps = {
-		variant: 'div';
-	} & CommonProps &
-		HTMLAttributes<HTMLDivElement>;
-
-	type StackSectionProps = {
-		variant: 'section';
-	} & CommonProps &
-		HTMLAttributes<HTMLElement>;
-
-	type StackProps = StackDivProps | StackSectionProps;
+	type StackProps = CommonProps & HTMLAttributes<HTMLElement>;
 
 	let props: StackProps = $props();
 </script>
