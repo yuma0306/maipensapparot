@@ -54,7 +54,7 @@ export const situations: Situation[] = [
 		]
 	},
 	{
-		id: 'restaurant',
+		id: 'eating',
 		title: 'レストラン',
 		description: 'レストランやカフェで使える定番フレーズを集めました。',
 		phrases: [
@@ -176,10 +176,10 @@ export const situations: Situation[] = [
 			},
 			{
 				id: 's2',
-				thai: 'ขอลองได้ไหม',
+				thai: 'ลองใส่ดูได้ไหมครับ',
 				japanese: '試着できますか？',
 				words: [
-					{ thai: 'ขอ', meaning: '〜させてください' },
+					{ thai: 'ลอง', meaning: '試す' },
 					{ thai: 'ลอง', meaning: '試す' },
 					{ thai: 'ได้ไหม', meaning: 'できますか？' }
 				]
