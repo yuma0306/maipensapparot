@@ -152,7 +152,6 @@
 {/if}
 
 <style>
-	/* 共通 */
 	.back-link {
 		font-size: calc(var(--font-size-1) * 1px);
 		color: var(--color-dark);
@@ -172,7 +171,6 @@
 		color: var(--color-primary);
 	}
 
-	/* レッスン */
 	.progress {
 		text-align: center;
 		font-size: calc(var(--font-size-1) * 1px);
@@ -198,7 +196,8 @@
 		padding: calc(var(--spacing-3) * 1px) calc(var(--spacing-2) * 1px);
 		background-color: var(--color-white);
 		border-radius: calc(var(--border-radius) * 1px);
-		box-shadow: var(--shadow);
+		box-shadow: 0 0 calc(var(--spacing-1) * 1px) var(--color-gray);
+
 		border: 1px solid var(--color-gray);
 		text-align: center;
 	}
@@ -277,24 +276,6 @@
 			opacity: 0.8;
 		}
 	}
-	.wrong-box {
-		padding: calc(var(--spacing-2) * 1px);
-		background-color: color-mix(in srgb, var(--color-danger) 8%, #fff);
-		border: 1px solid var(--color-danger);
-		border-radius: calc(var(--border-radius) * 1px);
-	}
-	.wrong-message {
-		font-size: calc(var(--font-size-1) * 1px);
-		color: var(--color-danger);
-	}
-	.hint {
-		display: flex;
-		align-items: center;
-		gap: calc(var(--spacing-1) * 1px);
-		font-size: calc(var(--font-size-2) * 1px);
-		color: var(--color-primary);
-		margin-top: 4px;
-	}
 	.skip-button {
 		width: 100%;
 		padding: calc(var(--spacing-2) * 1px);
@@ -314,13 +295,12 @@
 		}
 	}
 
-	/* 結果 */
 	.score-card {
 		text-align: center;
 		padding: calc(var(--spacing-3) * 1px);
 		background-color: var(--color-white);
 		border-radius: calc(var(--border-radius) * 1px);
-		box-shadow: var(--shadow);
+		box-shadow: 0 0 calc(var(--spacing-1) * 1px) var(--color-gray);
 		border: 1px solid var(--color-gray);
 	}
 	.score-label {
@@ -343,7 +323,8 @@
 		padding: calc(var(--spacing-2) * 1px);
 		background-color: var(--color-white);
 		border-radius: calc(var(--border-radius) * 1px);
-		box-shadow: var(--shadow);
+		box-shadow: 0 0 calc(var(--spacing-1) * 1px) var(--color-gray);
+
 		border: 1px solid var(--color-gray);
 	}
 	.result-card.correct {

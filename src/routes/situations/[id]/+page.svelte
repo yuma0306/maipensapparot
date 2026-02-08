@@ -78,7 +78,7 @@
 		padding: calc(var(--spacing-2) * 1px);
 		background-color: var(--color-white);
 		border-radius: calc(var(--border-radius) * 1px);
-		box-shadow: var(--shadow);
+		box-shadow: 0 0 calc(var(--spacing-1) * 1px) var(--color-gray);
 		border: 1px solid var(--color-gray);
 	}
 	@media (min-width: 640px) {

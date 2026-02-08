@@ -38,9 +38,6 @@
 	/* ボーダー */
 	--border-radius: 8;
 
-	/* シャドウ */
-	--shadow: 0 0 8px var(--color-gray);
-
 	/* animation */
 	--transition: 0.2s ease-in-out;
 	--scale: 1.2;

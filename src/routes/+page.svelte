@@ -23,7 +23,7 @@
 			id={situation.id}
 			title={situation.title}
 			description={situation.description}
-			image={situation.thumbnail}
+			thumbnail={situation.thumbnail}
 		/>
 	{/each}
 </CardList>
