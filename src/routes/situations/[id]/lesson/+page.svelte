@@ -12,7 +12,6 @@
 	let currentIndex = $state(0);
 	let userInput = $state('');
 	let results: LessonResult[] = $state([]);
-	let isWrong = $state(false);
 	let isCorrect = $state(false);
 	let showAnswer = $state(false);
 
@@ -24,8 +23,6 @@
 		if (userInput === currentPhrase.thai) {
 			results.push({ phrase: currentPhrase, correct: true });
 			isCorrect = true;
-		} else if (userInput.length >= currentPhrase.thai.length) {
-			isWrong = true;
 		}
 	}
 
@@ -37,13 +34,11 @@
 	function advance() {
 		currentIndex++;
 		userInput = '';
-		isWrong = false;
 		isCorrect = false;
 		showAnswer = false;
 	}
 
 	function handleInput() {
-		isWrong = false;
 		checkInput();
 	}
 
@@ -103,20 +98,6 @@
 					disabled={isCorrect}
 				/>
 			</div>
-
-			{#if isWrong}
-				<div class="wrong-box">
-					<p class="wrong-message">不一致です。もう一度試すか、スキップしてください。</p>
-					<p class="hint">
-						正解: <strong>{currentPhrase.thai}</strong>
-						<button
-							onclick={() => speak(currentPhrase.thai)}
-							class="speak-button"
-							aria-label="音声再生">🔊</button
-						>
-					</p>
-				</div>
-			{/if}
 
 			{#if !isCorrect}
 				<button onclick={skipPhrase} class="skip-button">スキップ（不正解扱い）</button>

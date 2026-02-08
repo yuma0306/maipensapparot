@@ -14,7 +14,7 @@
 </script>
 
 <Stack size={2} variant="section">
-	<a href="/" class="back-link">&larr; ホームに戻る</a>
+	<a href="/" class="back-link">ホームに戻る</a>
 	<h1 class="heading">{situation.title}</h1>
 	<p class="description">{situation.description}</p>
 </Stack>

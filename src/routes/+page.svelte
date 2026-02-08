@@ -8,7 +8,7 @@
 </script>
 
 <Stack size={2} variant="section">
-	<h2 class="heading">{siteData.title}へようこそ</h2>
+	<h1 class="heading">{siteData.title}へようこそ</h1>
 	<p class="lead">シチュエーションを選んで学習を始めましょう</p>
 </Stack>
 <Spacer size={3} variant="div" />
