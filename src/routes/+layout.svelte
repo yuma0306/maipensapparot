@@ -1,7 +1,6 @@
 <script lang="ts">
 	import '$lib/styles/reset.css';
 	import '$lib/styles/app.css';
-	import favicon from '/favicon.svg';
 	import Wrapper from '$lib/components/Wrapper/Wrapper.svelte';
 	import Main from '$lib/components/Main/Main.svelte';
 	import Footer from '$lib/components/Footer/Footer.svelte';
@@ -13,7 +12,7 @@
 </script>
 
 <svelte:head>
-	<link rel="icon" href={favicon} />
+	<link rel="icon" href={'/favicon.svg'} />
 </svelte:head>
 
 <Wrapper>
