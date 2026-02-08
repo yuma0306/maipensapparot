@@ -13,6 +13,7 @@
 	let userInput = $state('');
 	let results: LessonResult[] = $state([]);
 	let isWrong = $state(false);
+	let isCorrect = $state(false);
 	let showAnswer = $state(false);
 
 	const currentPhrase = $derived(phrases[currentIndex]);
@@ -22,7 +23,7 @@
 	function checkInput() {
 		if (userInput === currentPhrase.thai) {
 			results.push({ phrase: currentPhrase, correct: true });
-			advance();
+			isCorrect = true;
 		} else if (userInput.length >= currentPhrase.thai.length) {
 			isWrong = true;
 		}
@@ -37,6 +38,7 @@
 		currentIndex++;
 		userInput = '';
 		isWrong = false;
+		isCorrect = false;
 		showAnswer = false;
 	}
 
@@ -87,14 +89,20 @@
 		</div>
 
 		<Stack size={2} variant="div">
-			<input
-				type="text"
-				class="text-input"
-				bind:value={userInput}
-				oninput={handleInput}
-				placeholder="タイ語を入力..."
-				lang="th"
-			/>
+			<div class="input-wrapper" class:correct-input={isCorrect}>
+				{#if isCorrect}
+					<span class="correct-mark">⭕</span>
+				{/if}
+				<input
+					type="text"
+					class="text-input"
+					bind:value={userInput}
+					oninput={handleInput}
+					placeholder="タイ語を入力..."
+					lang="th"
+					disabled={isCorrect}
+				/>
+			</div>
 
 			{#if isWrong}
 				<div class="wrong-box">
@@ -110,7 +118,13 @@
 				</div>
 			{/if}
 
-			<button onclick={skipPhrase} class="skip-button">スキップ（不正解扱い）</button>
+			{#if !isCorrect}
+				<button onclick={skipPhrase} class="skip-button">スキップ（不正解扱い）</button>
+			{/if}
+
+			{#if isCorrect}
+				<button onclick={advance} class="next-button">次へ進む</button>
+			{/if}
 		</Stack>
 	</Stack>
 {:else}
@@ -235,17 +249,51 @@
 		font-weight: 700;
 		color: var(--color-primary);
 	}
+	.input-wrapper {
+		display: flex;
+		align-items: center;
+		gap: calc(var(--spacing-1) * 1px);
+		border: 2px solid var(--color-gray);
+		border-radius: calc(var(--border-radius) * 1px);
+		transition:
+			border-color var(--transition),
+			background-color var(--transition);
+		&:focus-within {
+			border-color: var(--color-secondary);
+		}
+	}
+	.input-wrapper.correct-input {
+		border-color: var(--color-success);
+		background-color: color-mix(in srgb, var(--color-success) 5%, #fff);
+	}
+	.correct-mark {
+		padding-left: calc(var(--spacing-2) * 1px);
+		font-size: calc(var(--font-size-3) * 1px);
+		flex-shrink: 0;
+	}
 	.text-input {
 		width: 100%;
 		padding: calc(var(--spacing-2) * 1px);
 		font-size: calc(var(--font-size-2) * 1px);
-		border: 2px solid var(--color-gray);
+		border: none;
 		border-radius: calc(var(--border-radius) * 1px);
 		outline: none;
-		transition: border-color var(--transition);
+		background: transparent;
 		font-family: var(--font-family);
-		&:focus {
-			border-color: var(--color-secondary);
+	}
+	.next-button {
+		width: 100%;
+		padding: calc(var(--spacing-2) * 1px);
+		font-size: calc(var(--font-size-1) * 1px);
+		font-weight: 700;
+		border: none;
+		border-radius: calc(var(--border-radius) * 1px);
+		background-color: var(--color-success);
+		color: var(--color-white);
+		cursor: pointer;
+		transition: opacity var(--transition);
+		&:hover {
+			opacity: 0.8;
 		}
 	}
 	.wrong-box {

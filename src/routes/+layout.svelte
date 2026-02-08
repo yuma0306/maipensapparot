@@ -7,6 +7,7 @@
 	import Footer from '$lib/components/Footer/Footer.svelte';
 	import Header from '$lib/components/Header/Header.svelte';
 	import Logo from '$lib/components/Logo/Logo.svelte';
+	import Inner from '$lib/components/Inner/Inner.svelte';
 
 	let { children, data } = $props();
 </script>
@@ -20,7 +21,9 @@
 		<Logo variant="a" href="/" />
 	</Header>
 	<Main>
-		{@render children()}
+		<Inner>
+			{@render children()}
+		</Inner>
 	</Main>
 	<Footer year={data.year} />
 </Wrapper>

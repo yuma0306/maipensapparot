@@ -16,7 +16,7 @@
 	.list {
 		display: grid;
 		justify-self: center;
-		width: min(100%, 1200px);
+		width: 100%;
 		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 		gap: calc(var(--spacing-2) * 1px);
 	}
