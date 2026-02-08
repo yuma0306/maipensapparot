@@ -42,6 +42,12 @@
 		isWrong = false;
 		checkInput();
 	}
+
+	function speak(text: string) {
+		const utterance = new SpeechSynthesisUtterance(text);
+		utterance.lang = 'th-TH';
+		speechSynthesis.speak(utterance);
+	}
 </script>
 
 {#if !isFinished}
@@ -51,12 +57,15 @@
 		<Stack size={2} variant="div">
 			<p class="progress">{currentIndex + 1} / {total}</p>
 			<div class="progress-bar">
-				<div class="progress-fill" style="width: {((currentIndex) / total) * 100}%"></div>
+				<div class="progress-fill" style="width: {(currentIndex / total) * 100}%"></div>
 			</div>
 		</Stack>
 
 		<div class="question-card">
 			<p class="japanese-prompt">{currentPhrase.japanese}</p>
+			<button onclick={() => speak(currentPhrase.thai)} class="listen-button" aria-label="タイ語の音声を聞く">
+				🔊 発音を聞く
+			</button>
 		</div>
 
 		<Stack size={2} variant="div">
@@ -72,7 +81,14 @@
 			{#if isWrong}
 				<div class="wrong-box">
 					<p class="wrong-message">不一致です。もう一度試すか、スキップしてください。</p>
-					<p class="hint">正解: <strong>{currentPhrase.thai}</strong></p>
+					<p class="hint">
+						正解: <strong>{currentPhrase.thai}</strong>
+						<button
+							onclick={() => speak(currentPhrase.thai)}
+							class="speak-button"
+							aria-label="音声再生">🔊</button
+						>
+					</p>
 				</div>
 			{/if}
 
@@ -97,7 +113,14 @@
 				<div class="result-card" class:correct={result.correct} class:incorrect={!result.correct}>
 					<span class="result-mark">{result.correct ? '⭕' : '❌'}</span>
 					<div class="result-content">
-						<p class="thai">{result.phrase.thai}</p>
+						<p class="thai">
+							{result.phrase.thai}
+							<button
+								onclick={() => speak(result.phrase.thai)}
+								class="speak-button"
+								aria-label="音声再生">🔊</button
+							>
+						</p>
 						<p class="japanese">{result.phrase.japanese}</p>
 						<ul class="word-list">
 							{#each result.phrase.words as word}
@@ -156,12 +179,28 @@
 		transition: width var(--transition);
 	}
 	.question-card {
+		display: grid;
+		justify-items: center;
+		row-gap: calc(var(--spacing-2) * 1px);
 		padding: calc(var(--spacing-3) * 1px) calc(var(--spacing-2) * 1px);
 		background-color: var(--color-white);
 		border-radius: calc(var(--border-radius) * 1px);
 		box-shadow: var(--shadow);
 		border: 1px solid var(--color-gray);
 		text-align: center;
+	}
+	.listen-button {
+		padding: calc(var(--spacing-1) * 1px) calc(var(--spacing-2) * 1px);
+		font-size: calc(var(--font-size-1) * 1px);
+		background: none;
+		border: 1px solid var(--color-gray);
+		border-radius: calc(var(--border-radius) * 1px);
+		cursor: pointer;
+		color: var(--color-dark);
+		transition: background-color var(--transition);
+		&:hover {
+			background-color: var(--color-primary-5);
+		}
 	}
 	.japanese-prompt {
 		font-size: calc(var(--font-size-4) * 1px);
@@ -192,6 +231,9 @@
 		color: var(--color-danger);
 	}
 	.hint {
+		display: flex;
+		align-items: center;
+		gap: calc(var(--spacing-1) * 1px);
 		font-size: calc(var(--font-size-2) * 1px);
 		color: var(--color-primary);
 		margin-top: 4px;
@@ -206,7 +248,9 @@
 		background: none;
 		color: var(--color-dark);
 		cursor: pointer;
-		transition: background-color var(--transition), color var(--transition);
+		transition:
+			background-color var(--transition),
+			color var(--transition);
 		&:hover {
 			background-color: var(--color-primary);
 			color: var(--color-white);
@@ -260,9 +304,25 @@
 		row-gap: 4px;
 	}
 	.thai {
+		display: flex;
+		align-items: center;
+		gap: calc(var(--spacing-1) * 1px);
 		font-size: calc(var(--font-size-2) * 1px);
 		font-weight: 700;
 		color: var(--color-primary);
+	}
+	.speak-button {
+		background: none;
+		border: 1px solid var(--color-gray);
+		border-radius: calc(var(--border-radius) * 1px);
+		padding: calc(var(--spacing-1) * 0.5px) calc(var(--spacing-1) * 1px);
+		cursor: pointer;
+		font-size: calc(var(--font-size-1) * 1px);
+		transition: background-color var(--transition);
+		flex-shrink: 0;
+		&:hover {
+			background-color: var(--color-primary-5);
+		}
 	}
 	.japanese {
 		font-size: calc(var(--font-size-1) * 1px);
