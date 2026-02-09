@@ -26,16 +26,11 @@
 	--line-height: 1.4;
 
 	/* スペーシング */
-	--spacing-1: 4;
-	--spacing-2: 8;
-	--spacing-3: 12;
-	--spacing-4: 16;
-	--spacing-5: 20;
-	--spacing-6: 24;
-	--spacing-7: 28;
-	--spacing-8: 32;
-	--spacing-9: 36;
-	--spacing-10: 40;
+	--spacing-1: 8;
+	--spacing-2: 16;
+	--spacing-3: 24;
+	--spacing-4: 32;
+	--spacing-5: 40;
 
 	/* ボーダー */
 	--border-radius: 8;

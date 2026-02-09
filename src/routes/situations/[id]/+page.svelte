@@ -10,15 +10,14 @@
 	const situation = $derived(data.situation);
 </script>
 
-<Stack size={6} variant="section">
-	<a href="/" class="back-link">ホームに戻る</a>
+<Stack size={3} variant="section">
 	<Typography size={5} variant="h1" color="secondary" weight="bold" align="center">
 		{situation.title}
 	</Typography>
 	<Typography size={2} variant="p" color="dark" weight="normal" align="left">
 		{situation.description}
 	</Typography>
-	<Stack size={5} variant="ul">
+	<Stack size={3} variant="ul">
 		{#each situation.phrases as phrase}
 			<Card {phrase} />
 		{/each}

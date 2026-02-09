@@ -19,12 +19,12 @@
 	}
 	@media (min-width: 640px) {
 		.main {
-			padding: calc(var(--spacing-10) * 1px) calc(var(--spacing-4) * 1px);
+			padding: calc(var(--spacing-5) * 1px) calc(var(--spacing-2) * 1px);
 		}
 	}
 	@media (max-width: 639px) {
 		.main {
-			padding: calc(var(--calc-sp) * var(--spacing-10)) calc(var(--calc-sp) * var(--spacing-4));
+			padding: calc(var(--calc-sp) * var(--spacing-5)) calc(var(--calc-sp) * var(--spacing-2));
 		}
 	}
 </style>

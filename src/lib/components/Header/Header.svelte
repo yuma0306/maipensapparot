@@ -15,12 +15,12 @@
 	}
 	@media (min-width: 640px) {
 		.header {
-			padding: calc(var(--spacing-4) * 1px);
+			padding: calc(var(--spacing-2) * 1px);
 		}
 	}
 	@media (max-width: 639px) {
 		.header {
-			padding: calc(var(--calc-sp) * var(--spacing-4));
+			padding: calc(var(--calc-sp) * var(--spacing-2));
 		}
 	}
 </style>

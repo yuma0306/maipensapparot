@@ -31,15 +31,15 @@
 		.button {
 			width: min(100%, 400px);
 			border-radius: calc(var(--border-radius) * 1px);
-			padding: calc(var(--spacing-4) * 1px);
-			font-size: calc(var(--font-size-2) * 1px);
-		}
+		padding: calc(var(--spacing-2) * 1px);
+		font-size: calc(var(--font-size-2) * 1px);
+	}
 	}
 	@media (max-width: 639px) {
 		.button {
 			width: 100%;
 			border-radius: calc(var(--calc-sp) * var(--border-radius));
-			padding: calc(var(--calc-sp) * var(--spacing-4));
+			padding: calc(var(--calc-sp) * var(--spacing-2));
 			font-size: calc(var(--calc-sp) * var(--font-size-2));
 		}
 	}

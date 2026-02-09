@@ -50,10 +50,10 @@
 </script>
 
 {#if !isFinished}
-	<Stack size={3} variant="section">
+	<Stack size={2} variant="section">
 		<a href="/situations/{situation.id}" class="back-link">&larr; 戻る</a>
 
-		<Stack size={2} variant="div">
+		<Stack size={1} variant="div">
 			<p class="progress">{currentIndex + 1} / {total}</p>
 			<div class="progress-bar">
 				<div class="progress-fill" style="width: {(currentIndex / total) * 100}%"></div>
@@ -83,7 +83,7 @@
 			{/if}
 		</div>
 
-		<Stack size={2} variant="div">
+		<Stack size={1} variant="div">
 			<div class="input-wrapper" class:correct-input={isCorrect}>
 				{#if isCorrect}
 					<span class="correct-mark">⭕</span>
@@ -109,7 +109,7 @@
 		</Stack>
 	</Stack>
 {:else}
-	<Stack size={2} variant="section">
+	<Stack size={1} variant="section">
 		<h1 class="heading">結果 — {situation.title}</h1>
 		<div class="score-card">
 			<p class="score-label">スコア</p>
@@ -117,11 +117,11 @@
 		</div>
 	</Stack>
 
-	<Spacer size={3} variant="div" />
+	<Spacer size={2} variant="div" />
 
-	<Stack size={2} variant="section">
+	<Stack size={1} variant="section">
 		<h2 class="sub-heading">回答一覧</h2>
-		<Stack size={2} variant="div">
+		<Stack size={1} variant="div">
 			{#each results as result}
 				<div class="result-card" class:correct={result.correct} class:incorrect={!result.correct}>
 					<span class="result-mark">{result.correct ? '⭕' : '❌'}</span>
@@ -146,7 +146,7 @@
 		</Stack>
 	</Stack>
 
-	<Spacer size={3} variant="div" />
+	<Spacer size={2} variant="div" />
 
 	<a href="/situations/{situation.id}" class="back-button">シチュエーション詳細に戻る</a>
 {/if}
@@ -192,8 +192,8 @@
 	.question-card {
 		display: grid;
 		justify-items: center;
-		row-gap: calc(var(--spacing-2) * 1px);
-		padding: calc(var(--spacing-3) * 1px) calc(var(--spacing-2) * 1px);
+		row-gap: calc(var(--spacing-1) * 1px);
+		padding: calc(var(--spacing-2) * 1px) calc(var(--spacing-1) * 1px);
 		background-color: var(--color-white);
 		border-radius: calc(var(--border-radius) * 1px);
 		box-shadow: 0 0 calc(var(--spacing-1) * 1px) var(--color-gray);
@@ -212,7 +212,7 @@
 		color: var(--color-gray);
 	}
 	.listen-button {
-		padding: calc(var(--spacing-1) * 1px) calc(var(--spacing-2) * 1px);
+		padding: calc(var(--spacing-1) * 1px) calc(var(--spacing-1) * 1px);
 		font-size: calc(var(--font-size-1) * 1px);
 		background: none;
 		border: 1px solid var(--color-gray);
@@ -247,13 +247,13 @@
 		background-color: color-mix(in srgb, var(--color-success) 5%, #fff);
 	}
 	.correct-mark {
-		padding-left: calc(var(--spacing-2) * 1px);
+		padding-left: calc(var(--spacing-1) * 1px);
 		font-size: calc(var(--font-size-3) * 1px);
 		flex-shrink: 0;
 	}
 	.text-input {
 		width: 100%;
-		padding: calc(var(--spacing-2) * 1px);
+		padding: calc(var(--spacing-1) * 1px);
 		font-size: calc(var(--font-size-2) * 1px);
 		border: none;
 		border-radius: calc(var(--border-radius) * 1px);
@@ -263,7 +263,7 @@
 	}
 	.next-button {
 		width: 100%;
-		padding: calc(var(--spacing-2) * 1px);
+		padding: calc(var(--spacing-1) * 1px);
 		font-size: calc(var(--font-size-1) * 1px);
 		font-weight: 700;
 		border: none;
@@ -278,7 +278,7 @@
 	}
 	.skip-button {
 		width: 100%;
-		padding: calc(var(--spacing-2) * 1px);
+		padding: calc(var(--spacing-1) * 1px);
 		font-size: calc(var(--font-size-1) * 1px);
 		font-weight: 700;
 		border: 2px solid var(--color-dark);
@@ -297,7 +297,7 @@
 
 	.score-card {
 		text-align: center;
-		padding: calc(var(--spacing-3) * 1px);
+		padding: calc(var(--spacing-2) * 1px);
 		background-color: var(--color-white);
 		border-radius: calc(var(--border-radius) * 1px);
 		box-shadow: 0 0 calc(var(--spacing-1) * 1px) var(--color-gray);
@@ -319,8 +319,8 @@
 	}
 	.result-card {
 		display: flex;
-		gap: calc(var(--spacing-2) * 1px);
-		padding: calc(var(--spacing-2) * 1px);
+		gap: calc(var(--spacing-1) * 1px);
+		padding: calc(var(--spacing-1) * 1px);
 		background-color: var(--color-white);
 		border-radius: calc(var(--border-radius) * 1px);
 		box-shadow: 0 0 calc(var(--spacing-1) * 1px) var(--color-gray);
@@ -353,7 +353,7 @@
 		background: none;
 		border: 1px solid var(--color-gray);
 		border-radius: calc(var(--border-radius) * 1px);
-		padding: calc(var(--spacing-1) * 0.5px) calc(var(--spacing-1) * 1px);
+		padding: 4px calc(var(--spacing-1) * 1px);
 		cursor: pointer;
 		font-size: calc(var(--font-size-1) * 1px);
 		transition: background-color var(--transition);
@@ -369,14 +369,14 @@
 	.word-list {
 		display: grid;
 		row-gap: 4px;
-		padding-left: calc(var(--spacing-2) * 1px);
+		padding-left: calc(var(--spacing-1) * 1px);
 		font-size: calc(var(--font-size-1) * 1px);
 		color: var(--color-dark);
 	}
 	.back-button {
 		display: block;
 		text-align: center;
-		padding: calc(var(--spacing-2) * 1px);
+		padding: calc(var(--spacing-1) * 1px);
 		background-color: var(--color-secondary);
 		color: var(--color-white);
 		font-weight: 700;

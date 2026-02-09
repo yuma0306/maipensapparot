@@ -22,7 +22,7 @@
 	}
 	@media (min-width: 640px) {
 		.footer {
-			padding: calc(var(--spacing-4) * 1px);
+			padding: calc(var(--spacing-2) * 1px);
 		}
 		.footer__text {
 			font-size: calc(var(--font-size-1) * 1px);
@@ -30,7 +30,7 @@
 	}
 	@media (max-width: 639px) {
 		.footer {
-			padding: calc(var(--calc-sp) * var(--spacing-4));
+			padding: calc(var(--calc-sp) * var(--spacing-2));
 		}
 		.footer__text {
 			font-size: calc(var(--calc-sp) * var(--font-size-1));

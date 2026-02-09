@@ -13,7 +13,7 @@
 	const situations = $derived(data.situations);
 </script>
 
-<Stack size={6} variant="section">
+<Stack size={3} variant="section">
 	<Typography size={5} variant="h1" color="secondary" weight="bold" align="center">
 		{siteData.title}へ<Break media="onlySp" />ようこそ
 	</Typography>
