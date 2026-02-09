@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { siteData } from '$lib/const/siteData';
+	import { siteData } from '$lib/constants/siteData';
 </script>
 
 <a class="logo" href="/">{siteData.title}</a>

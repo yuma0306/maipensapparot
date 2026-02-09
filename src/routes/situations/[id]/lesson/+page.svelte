@@ -7,7 +7,7 @@
 	import SpeakButton from '$lib/components/SpeakButton/SpeakButton.svelte';
 	import Button from '$lib/components/Button/Button.svelte';
 	import ListItem from '$lib/components/ListItem/ListItem.svelte';
-	import { paths } from '$lib/const/paths';
+	import { paths } from '$lib/constants/paths';
 
 	let props: PageProps = $props();
 	const situation = $derived(props.data.situation);
@@ -189,8 +189,8 @@
 	}
 	.listen-button {
 		padding: calc(var(--spacing-1) * 1px);
-		font-size: calc(var(--font-size-1) * 1px);
-		background: none;
+		font-size: calc(var(--font-size-2) * 1px);
+		background: var(--color-primary-10);
 		border: 1px solid var(--color-gray);
 		border-radius: calc(var(--border-radius) * 1px);
 		cursor: pointer;

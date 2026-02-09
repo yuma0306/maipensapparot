@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Inner from '$lib/components/Inner/Inner.svelte';
-	import { siteData } from '$lib/const/siteData';
+	import { siteData } from '$lib/constants/siteData';
 
 	let { year } = $props();
 </script>
