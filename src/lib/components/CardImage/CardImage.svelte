@@ -72,7 +72,6 @@
 		overflow: hidden;
 	}
 	.card__description {
-		color: var(--color-primary);
 		display: -webkit-box;
 		-webkit-line-clamp: 2;
 		-webkit-box-orient: vertical;

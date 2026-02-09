@@ -12,57 +12,59 @@
 	let props: CardProps = $props();
 </script>
 
-<li class="phrase-card">
+<li class="card">
 	<Stack size={1} variant="dl">
-		<dt class="phrase-header">
-			<Typography size={2} variant="p" color="primary" weight="bold">
+		<dt class="header">
+			<Typography size={4} variant="p" color="primary" weight="bold" align="left">
 				{props.phrase.thai}
 			</Typography>
 			<SpeakButton text={props.phrase.thai} />
 		</dt>
-		<Typography size={2} variant="dd" color="dark" weight="normal">
+		<Typography size={2} variant="dd" color="dark" weight="normal" align="left">
 			{props.phrase.japanese}
 		</Typography>
 	</Stack>
-	<Stack size={1} variant="ul">
-		{#each props.phrase.words as word}
-			<ListItem symbol="none">
-				<div class="word-inner">
-					<Typography size={2} variant="span" color="dark" weight="bold">
-						{word.thai}
-					</Typography>
-					<Typography size={2} variant="span" color="dark" weight="normal">
-						{` ： ${word.meaning}`}
-					</Typography>
-					<SpeakButton text={word.thai} />
-				</div>
-			</ListItem>
-		{/each}
-	</Stack>
+	<div class="footer">
+		<Stack size={4} variant="ul">
+			{#each props.phrase.words as word}
+				<ListItem symbol="none">
+					<div class="inner">
+						<Typography size={2} variant="span" color="dark" weight="bold" align="left">
+							{word.thai}
+						</Typography>
+						<Typography size={2} variant="span" color="dark" weight="normal" align="left">
+							{word.meaning}
+						</Typography>
+						<SpeakButton text={word.thai} />
+					</div>
+				</ListItem>
+			{/each}
+		</Stack>
+	</div>
 </li>
 
 <style>
-	.phrase-card {
+	.card {
 		position: relative;
 		display: grid;
-		row-gap: calc(var(--spacing-2) * 1px);
-		padding: calc(var(--spacing-2) * 1px);
+		align-items: center;
 		background-color: var(--color-white);
-		border-radius: calc(var(--border-radius) * 1px);
-		box-shadow: 0 0 calc(var(--spacing-1) * 1px) var(--color-gray);
 		border: 1px solid var(--color-gray);
-		border-left-width: calc(var(--spacing-1) * 1px);
 	}
 	@media (min-width: 640px) {
-		.phrase-card {
+		.card {
 			grid-template-columns: 1fr 1fr;
-			align-items: center;
-			column-gap: calc(var(--spacing-2) * 1px);
+			row-gap: calc(var(--spacing-8) * 1px);
+			padding: calc(var(--spacing-4) * 1px);
+			column-gap: calc(var(--spacing-4) * 1px);
+			border-radius: calc(var(--border-radius) * 1px);
+			box-shadow: 0 0 calc(var(--spacing-2) * 1px) var(--color-gray);
+			border-left-width: calc(var(--spacing-2) * 1px);
 			&::before {
 				content: '';
 				position: absolute;
 				top: 50%;
-				left: calc(50% - calc(var(--spacing-1) * 1px));
+				left: calc(50% - calc(var(--spacing-2) * 1px));
 				width: 1px;
 				height: calc(100% - calc(var(--spacing-4) * 1px));
 				background-color: var(--color-gray);
@@ -70,14 +72,61 @@
 			}
 		}
 	}
-	.phrase-header {
+	@media (max-width: 639px) {
+		.card {
+			grid-template-rows: auto 1fr;
+			row-gap: calc(var(--spacing-8) * var(--calc-sp));
+			padding: calc(var(--spacing-4) * var(--calc-sp));
+			column-gap: calc(var(--spacing-4) * var(--calc-sp));
+			border-radius: calc(var(--border-radius) * var(--calc-sp));
+			box-shadow: 0 0 calc(var(--spacing-2) * var(--calc-sp)) var(--color-gray);
+			border-left-width: calc(var(--spacing-2) * var(--calc-sp));
+		}
+	}
+	.header {
 		display: flex;
 		align-items: center;
-		column-gap: calc(var(--spacing-2) * 1px);
 	}
-	.word-inner {
+	@media (min-width: 640px) {
+		.header {
+			column-gap: calc(var(--spacing-2) * 1px);
+		}
+	}
+	@media (max-width: 639px) {
+		.header {
+			column-gap: calc(var(--calc-sp) * var(--spacing-2));
+		}
+	}
+	@media (max-width: 639px) {
+		.footer {
+			position: relative;
+			&::before {
+				content: '';
+				position: absolute;
+				top: calc(-1 * var(--spacing-4) * var(--calc-sp));
+				left: 0;
+				width: 100%;
+				height: 1px;
+				background-color: var(--color-gray);
+			}
+		}
+	}
+	.footer {
+		position: relative;
+	}
+	.inner {
 		display: flex;
 		align-items: center;
 		column-gap: calc(var(--spacing-1) * 1px);
+	}
+	@media (min-width: 640px) {
+		.inner {
+			column-gap: calc(var(--spacing-2) * 1px);
+		}
+	}
+	@media (max-width: 639px) {
+		.inner {
+			column-gap: calc(var(--calc-sp) * var(--spacing-1));
+		}
 	}
 </style>

@@ -13,24 +13,23 @@
 	const situations = $derived(data.situations);
 </script>
 
-<Stack size={4} variant="section">
-	<Typography size={4} variant="h1" color="secondary" weight="bold" align="center">
+<Stack size={6} variant="section">
+	<Typography size={5} variant="h1" color="secondary" weight="bold" align="center">
 		{siteData.title}へ<Break media="onlySp" />ようこそ
 	</Typography>
 	<Typography size={2} variant="p" color="dark" weight="normal" align="center">
 		シチュエーションを選んで学習を始めましょう
 	</Typography>
+	<CardImageList>
+		{#each situations as situation}
+			<CardImage
+				variant="a"
+				href={paths.situation(situation.id)}
+				id={situation.id}
+				title={situation.title}
+				description={situation.description}
+				thumbnail={situation.thumbnail}
+			/>
+		{/each}
+	</CardImageList>
 </Stack>
-<Spacer size={6} variant="div" />
-<CardImageList>
-	{#each situations as situation}
-		<CardImage
-			variant="a"
-			href={paths.situation(situation.id)}
-			id={situation.id}
-			title={situation.title}
-			description={situation.description}
-			thumbnail={situation.thumbnail}
-		/>
-	{/each}
-</CardImageList>
