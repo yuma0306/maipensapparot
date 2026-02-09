@@ -4,10 +4,10 @@
 	import Stack from '$lib/components/Stack/Stack.svelte';
 	import Spacer from '$lib/components/Spacer/Spacer.svelte';
 	import Typography from '$lib/components/Typography/Typography.svelte';
-	import SpeakButton from '$lib/components/SpeakButton/SpeakButton.svelte';
 	import Button from '$lib/components/Button/Button.svelte';
 	import ListItem from '$lib/components/ListItem/ListItem.svelte';
 	import { paths } from '$lib/constants/paths';
+	import VoiceButton from '$lib/components/VoiceButton/VoiceButton.svelte';
 
 	let props: PageProps = $props();
 	const situation = $derived(props.data.situation);
@@ -64,7 +64,7 @@
 				{currentPhrase.japanese}
 			</Typography>
 			<div class="question-actions">
-				<SpeakButton text={currentPhrase.thai} />
+				<VoiceButton text={currentPhrase.thai} />
 				<button
 					onclick={() => (showAnswer = !showAnswer)}
 					class="listen-button"
@@ -134,7 +134,7 @@
 							<Typography size={2} variant="span" color="primary" weight="bold" align="left">
 								{result.phrase.thai}
 							</Typography>
-							<SpeakButton text={result.phrase.thai} />
+							<VoiceButton text={result.phrase.thai} />
 						</div>
 						<Typography size={1} variant="p" color="dark" weight="normal" align="left">
 							{result.phrase.japanese}

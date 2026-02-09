@@ -3,7 +3,7 @@
 	import ListItem from '../ListItem/ListItem.svelte';
 	import Stack from '../Stack/Stack.svelte';
 	import Typography from '../Typography/Typography.svelte';
-	import SpeakButton from '../SpeakButton/SpeakButton.svelte';
+	import VoiceButton from '../VoiceButton/VoiceButton.svelte';
 
 	type CardProps = {
 		phrase: Phrase;
@@ -20,7 +20,7 @@
 			<Typography size={4} variant="p" color="primary" weight="bold" align="left">
 				{phrase.thai}
 			</Typography>
-			<SpeakButton text={phrase.thai} />
+			<VoiceButton text={phrase.thai} />
 		</dt>
 		<Typography size={2} variant="dd" color="dark" weight="normal" align="left">
 			{phrase.japanese}
@@ -37,7 +37,7 @@
 						<Typography size={2} variant="span" color="dark" weight="normal" align="left">
 							{word.meaning}
 						</Typography>
-						<SpeakButton text={word.thai} />
+						<VoiceButton text={word.thai} />
 					</div>
 				</ListItem>
 			{/each}
