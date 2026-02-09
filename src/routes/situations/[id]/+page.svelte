@@ -24,14 +24,3 @@
 	</Stack>
 	<Button href={`${paths.lesson(situation.id).toString()}`}>レッスンをスタート</Button>
 </Stack>
-
-<style>
-	.back-link {
-		font-size: calc(var(--font-size-1) * 1px);
-		color: var(--color-dark);
-		text-decoration: none;
-		&:hover {
-			text-decoration: underline;
-		}
-	}
-</style>
