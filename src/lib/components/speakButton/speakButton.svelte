@@ -1,11 +1,12 @@
 <script lang="ts">
 	import type { Phrase } from '$lib/types';
+	import SoundIcon from '../Icon/SoundIcon.svelte';
 
-	type SpeakButtonProps = {
+	type Props = {
 		text: Phrase['thai'];
 	};
 
-	let props: SpeakButtonProps = $props();
+	let { text }: Props = $props();
 
 	function speak(text: string) {
 		const utterance = new SpeechSynthesisUtterance(text);
@@ -14,10 +15,14 @@
 	}
 </script>
 
-<button onclick={() => speak(props.text)} class="button">再生</button>
+<button onclick={() => speak(text)} class="button">
+	<SoundIcon />
+</button>
 
 <style>
 	.button {
+		display: grid;
+		place-content: center;
 		background-color: var(--color-secondary-10);
 		color: var(--color-secondary);
 		border: 1px solid var(--color-secondary);

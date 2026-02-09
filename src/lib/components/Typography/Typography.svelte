@@ -1,26 +1,27 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
 
-	type TypographyProps = {
+	type Props = {
 		children: Snippet;
 		size: 1 | 2 | 3 | 4 | 5;
 		variant: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span' | 'dt' | 'dd';
 		color: 'primary' | 'secondary' | 'dark' | 'white' | 'gray';
 		weight: 'normal' | 'bold';
+		align: 'left' | 'center' | 'right';
 	};
 
-	let props: TypographyProps = $props();
+	let { children, size, variant, color, weight, align }: Props = $props();
 </script>
 
 <svelte:element
-	this={props.variant}
+	this={variant}
 	class="typography"
-	data-size={props.size}
-	data-color={props.color}
-	data-weight={props.weight}
-	{...props}
+	data-size={size}
+	data-color={color}
+	data-weight={weight}
+	data-align={align}
 >
-	{@render props.children()}
+	{@render children()}
 </svelte:element>
 
 <style>
@@ -45,6 +46,15 @@
 		}
 		&[data-weight='bold'] {
 			font-weight: 700;
+		}
+		&[data-align='left'] {
+			text-align: left;
+		}
+		&[data-align='center'] {
+			text-align: center;
+		}
+		&[data-align='right'] {
+			text-align: right;
 		}
 	}
 	@media (min-width: 640px) {

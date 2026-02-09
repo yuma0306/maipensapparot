@@ -3,21 +3,16 @@
 	import type { HTMLAttributes } from 'svelte/elements';
 
 	type CommonProps = {
-		size: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+		size: 1 | 2 | 3 | 4 | 5;
 		variant: 'div' | 'ul' | 'section' | 'dl';
 		children: Snippet;
 	};
-	type StackProps = CommonProps & HTMLAttributes<HTMLElement>;
+	type Props = CommonProps & HTMLAttributes<HTMLElement>;
 
-	let props: StackProps = $props();
+	let props: Props = $props();
 </script>
 
-<svelte:element
-	this={props.variant}
-	class="stack"
-	style="--stack-gap: var(--spacing-{props.size})"
-	{...props}
->
+<svelte:element this={props.variant} class="stack" data-size={props.size} {...props}>
 	{@render props.children()}
 </svelte:element>
 
@@ -27,12 +22,40 @@
 	}
 	@media (min-width: 640px) {
 		.stack {
-			row-gap: calc(var(--stack-gap) * 1px);
+			&[data-size='1'] {
+				row-gap: calc(var(--spacing-1) * 1px);
+			}
+			&[data-size='2'] {
+				row-gap: calc(var(--spacing-2) * 1px);
+			}
+			&[data-size='3'] {
+				row-gap: calc(var(--spacing-3) * 1px);
+			}
+			&[data-size='4'] {
+				row-gap: calc(var(--spacing-4) * 1px);
+			}
+			&[data-size='5'] {
+				row-gap: calc(var(--spacing-5) * 1px);
+			}
 		}
 	}
 	@media (max-width: 639px) {
 		.stack {
-			row-gap: calc(var(--calc-sp) * var(--stack-gap));
+			&[data-size='1'] {
+				row-gap: calc(var(--calc-sp) * var(--spacing-1));
+			}
+			&[data-size='2'] {
+				row-gap: calc(var(--calc-sp) * var(--spacing-2));
+			}
+			&[data-size='3'] {
+				row-gap: calc(var(--calc-sp) * var(--spacing-3));
+			}
+			&[data-size='4'] {
+				row-gap: calc(var(--calc-sp) * var(--spacing-4));
+			}
+			&[data-size='5'] {
+				row-gap: calc(var(--calc-sp) * var(--spacing-5));
+			}
 		}
 	}
 </style>

@@ -1,16 +1,16 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
 
-	type ListItemProps = {
+	type Props = {
 		children: Snippet;
 		symbol: 'dot' | 'asterisk' | 'number' | 'none';
 	};
 
-	let props: ListItemProps = $props();
+	let { children, symbol }: Props = $props();
 </script>
 
-<li class="item" data-symbol={props.symbol}>
-	<div>{@render props.children()}</div>
+<li class="item" data-symbol={symbol}>
+	<div>{@render children()}</div>
 </li>
 
 <style>

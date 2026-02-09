@@ -1,15 +1,15 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
 
-	type WrapperProps = {
+	type Props = {
 		children: Snippet;
 	};
 
-	let props: WrapperProps = $props();
+	let { children }: Props = $props();
 </script>
 
 <div class="wrapper">
-	{@render props.children()}
+	{@render children()}
 </div>
 
 <style>
