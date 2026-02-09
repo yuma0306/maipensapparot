@@ -7,26 +7,28 @@
 
 	type CardProps = {
 		phrase: Phrase;
+		borderColor: 'gray' | 'success' | 'danger';
+		hasBorderLeft: boolean;
 	};
 
-	let props: CardProps = $props();
+	let { phrase, borderColor, hasBorderLeft }: CardProps = $props();
 </script>
 
-<li class="card">
+<li class="card" data-border-left={hasBorderLeft} data-border-color={borderColor}>
 	<Stack size={1} variant="dl">
 		<dt class="header">
 			<Typography size={4} variant="p" color="primary" weight="bold" align="left">
-				{props.phrase.thai}
+				{phrase.thai}
 			</Typography>
-			<SpeakButton text={props.phrase.thai} />
+			<SpeakButton text={phrase.thai} />
 		</dt>
 		<Typography size={2} variant="dd" color="dark" weight="normal" align="left">
-			{props.phrase.japanese}
+			{phrase.japanese}
 		</Typography>
 	</Stack>
 	<div class="footer">
 		<Stack size={2} variant="ul">
-			{#each props.phrase.words as word}
+			{#each phrase.words as word}
 				<ListItem symbol="none">
 					<div class="inner">
 						<Typography size={2} variant="span" color="dark" weight="bold" align="left">
@@ -49,7 +51,15 @@
 		display: grid;
 		align-items: center;
 		background-color: var(--color-white);
-		border: 1px solid var(--color-gray);
+		&[data-border-color='gray'] {
+			border: 1px solid var(--color-gray);
+		}
+		&[data-border-color='success'] {
+			border: 1px solid var(--color-success);
+		}
+		&[data-border-color='danger'] {
+			border: 1px solid var(--color-danger);
+		}
 	}
 	@media (min-width: 640px) {
 		.card {
@@ -59,7 +69,9 @@
 			column-gap: calc(var(--spacing-2) * 1px);
 			border-radius: calc(var(--border-radius) * 1px);
 			box-shadow: 0 0 calc(var(--spacing-1) * 1px) var(--color-gray);
-			border-left-width: calc(var(--spacing-1) * 1px);
+			&[data-border-left='true'] {
+				border-left-width: calc(var(--spacing-1) * 1px);
+			}
 			&::before {
 				content: '';
 				position: absolute;

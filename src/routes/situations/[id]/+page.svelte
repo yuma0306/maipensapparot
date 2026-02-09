@@ -19,7 +19,7 @@
 	</Typography>
 	<Stack size={3} variant="ul">
 		{#each situation.phrases as phrase}
-			<Card {phrase} />
+			<Card {phrase} hasBorderLeft={true} borderColor="gray" />
 		{/each}
 	</Stack>
 	<Button href={`${paths.lesson(situation.id).toString()}`}>レッスンをスタート</Button>
