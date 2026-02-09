@@ -1,15 +1,15 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
 
-	type CardListProps = {
+	type Props = {
 		children: Snippet;
 	};
 
-	let props: CardListProps = $props();
+	let { children }: Props = $props();
 </script>
 
 <div class="list">
-	{@render props.children()}
+	{@render children()}
 </div>
 
 <style>
@@ -17,7 +17,13 @@
 		display: grid;
 		justify-self: center;
 		width: 100%;
-		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-		gap: calc(var(--spacing-2) * 1px);
+		@media (min-width: 640px) {
+			grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+			gap: calc(var(--spacing-4) * 1px);
+		}
+		@media (max-width: 639px) {
+			grid-template-columns: repeat(auto-fit, minmax(calc(var(--calc-sp) * 280), 1fr));
+			gap: calc(var(--calc-sp) * var(--spacing-4));
+		}
 	}
 </style>

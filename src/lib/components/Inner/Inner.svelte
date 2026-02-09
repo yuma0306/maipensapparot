@@ -1,21 +1,24 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
-	type InnerProps = {
+	type Props = {
 		children: Snippet;
 	};
 
-	let props: InnerProps = $props();
+	let { children }: Props = $props();
 </script>
 
 <div class="inner">
-	{@render props.children()}
+	{@render children()}
 </div>
 
 <style>
+	.inner {
+		width: 100%;
+		margin-inline: auto;
+	}
 	@media (min-width: 640px) {
 		.inner {
-			width: min(100%, 1200px);
-			margin-inline: auto;
+			max-width: 1200px;
 		}
 	}
 </style>

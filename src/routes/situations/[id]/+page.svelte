@@ -2,9 +2,7 @@
 	import type { PageData } from './$types';
 	import Stack from '$lib/components/Stack/Stack.svelte';
 	import Spacer from '$lib/components/Spacer/Spacer.svelte';
-	import ListItem from '$lib/components/ListItem/ListItem.svelte';
 	import Typography from '$lib/components/Typography/Typography.svelte';
-	import SpeakButton from '$lib/components/speakButton/speakButton.svelte';
 	import Card from '$lib/components/Card/Card.svelte';
 
 	let { data }: { data: PageData } = $props();
@@ -17,10 +15,12 @@
 	<p class="description">{situation.description}</p>
 </Stack>
 
-<Spacer size={3} variant="div" />
+<Spacer size={4} variant="div" />
 
 <Stack size={2} variant="section">
-	<Typography size={3} variant="h2" color="primary" weight="bold">フレーズ一覧</Typography>
+	<Typography size={3} variant="h2" color="primary" weight="bold" align="center"
+		>フレーズ一覧</Typography
+	>
 	<Stack size={2} variant="ul">
 		{#each situation.phrases as phrase}
 			<Card {phrase} />

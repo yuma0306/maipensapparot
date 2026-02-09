@@ -11,11 +11,12 @@
 	--color-gray: #c5c5c5;
 
 	/* フォントサイズ */
-	--font-size-1: 16;
-	--font-size-2: 20;
-	--font-size-3: 24;
-	--font-size-4: 28;
-	--font-size-5: 32;
+	--font-size-1: 12;
+	--font-size-2: 16;
+	--font-size-3: 20;
+	--font-size-4: 24;
+	--font-size-5: 28;
+	--font-size-6: 32;
 
 	/* フォントファミリー */
 	--font-family:
@@ -25,14 +26,16 @@
 	--line-height: 1.4;
 
 	/* スペーシング */
-	--spacing-1: 8;
-	--spacing-2: 16;
-	--spacing-3: 24;
-	--spacing-4: 32;
-	--spacing-5: 40;
-	--spacing-6: 48;
-	--spacing-7: 56;
-	--spacing-8: 64;
+	--spacing-1: 4;
+	--spacing-2: 8;
+	--spacing-3: 12;
+	--spacing-4: 16;
+	--spacing-5: 20;
+	--spacing-6: 24;
+	--spacing-7: 28;
+	--spacing-8: 32;
+	--spacing-9: 36;
+	--spacing-10: 40;
 
 	/* ボーダー */
 	--border-radius: 8;

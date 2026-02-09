@@ -1,9 +1,9 @@
 <script lang="ts">
 	import type { Phrase } from '$lib/types';
 	import ListItem from '../ListItem/ListItem.svelte';
-	import SpeakButton from '../speakButton/speakButton.svelte';
 	import Stack from '../Stack/Stack.svelte';
 	import Typography from '../Typography/Typography.svelte';
+	import SpeakButton from '../SpeakButton/SpeakButton.svelte';
 
 	type CardProps = {
 		phrase: Phrase;
