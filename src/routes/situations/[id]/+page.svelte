@@ -17,10 +17,10 @@
 	<Typography size={2} variant="p" color="dark" weight="normal" align="left">
 		{situation.description}
 	</Typography>
+	<Button href={`${paths.lesson(situation.id).toString()}`}>レッスンをスタート</Button>
 	<Stack size={3} variant="ul">
 		{#each situation.phrases as phrase}
 			<Card {phrase} hasBorderLeft={true} borderColor="gray" />
 		{/each}
 	</Stack>
-	<Button href={`${paths.lesson(situation.id).toString()}`}>レッスンをスタート</Button>
 </Stack>
