@@ -3,6 +3,11 @@
 	import type { PageProps } from './$types';
 	import Stack from '$lib/components/Stack/Stack.svelte';
 	import Spacer from '$lib/components/Spacer/Spacer.svelte';
+	import Typography from '$lib/components/Typography/Typography.svelte';
+	import SpeakButton from '$lib/components/SpeakButton/SpeakButton.svelte';
+	import Button from '$lib/components/Button/Button.svelte';
+	import ListItem from '$lib/components/ListItem/ListItem.svelte';
+	import { paths } from '$lib/const/paths';
 
 	let props: PageProps = $props();
 	const situation = $derived(props.data.situation);
@@ -51,17 +56,21 @@
 
 {#if !isFinished}
 	<Stack size={2} variant="section">
-		<a href="/situations/{situation.id}" class="back-link">&larr; 戻る</a>
+		<a href={paths.situation(situation.id)} class="back-link">&larr; 戻る</a>
 
 		<Stack size={1} variant="div">
-			<p class="progress">{currentIndex + 1} / {total}</p>
+			<Typography size={1} variant="p" color="dark" weight="bold" align="center">
+				{currentIndex + 1} / {total}
+			</Typography>
 			<div class="progress-bar">
 				<div class="progress-fill" style="width: {(currentIndex / total) * 100}%"></div>
 			</div>
 		</Stack>
 
 		<div class="question-card">
-			<p class="japanese-prompt">{currentPhrase.japanese}</p>
+			<Typography size={4} variant="p" color="primary" weight="bold" align="center">
+				{currentPhrase.japanese}
+			</Typography>
 			<div class="question-actions">
 				<button
 					onclick={() => speak(currentPhrase.thai)}
@@ -79,7 +88,9 @@
 				</button>
 			</div>
 			{#if showAnswer}
-				<p class="answer-text">{currentPhrase.thai}</p>
+				<Typography size={3} variant="p" color="gray" weight="normal" align="center">
+					{currentPhrase.thai}
+				</Typography>
 			{/if}
 		</div>
 
@@ -110,36 +121,50 @@
 	</Stack>
 {:else}
 	<Stack size={1} variant="section">
-		<h1 class="heading">結果 — {situation.title}</h1>
+		<Typography size={5} variant="h1" color="secondary" weight="bold" align="center">
+			結果 — {situation.title}
+		</Typography>
 		<div class="score-card">
-			<p class="score-label">スコア</p>
-			<p class="score-value">{correctCount} <span class="score-divider">/</span> {total}</p>
+			<Typography size={1} variant="p" color="dark" weight="bold" align="center">
+				スコア
+			</Typography>
+			<Typography size={5} variant="p" color="secondary" weight="bold" align="center">
+				{correctCount}
+				<Typography size={5} variant="span" color="dark" weight="normal" align="center">
+					/
+				</Typography>
+				{total}
+			</Typography>
 		</div>
 	</Stack>
 
 	<Spacer size={2} variant="div" />
 
 	<Stack size={1} variant="section">
-		<h2 class="sub-heading">回答一覧</h2>
+		<Typography size={3} variant="h2" color="primary" weight="bold" align="left">
+			回答一覧
+		</Typography>
 		<Stack size={1} variant="div">
 			{#each results as result}
 				<div class="result-card" class:correct={result.correct} class:incorrect={!result.correct}>
 					<span class="result-mark">{result.correct ? '⭕' : '❌'}</span>
 					<div class="result-content">
-						<p class="thai">
-							{result.phrase.thai}
-							<button
-								onclick={() => speak(result.phrase.thai)}
-								class="speak-button"
-								aria-label="音声再生">🔊</button
-							>
-						</p>
-						<p class="japanese">{result.phrase.japanese}</p>
-						<ul class="word-list">
+						<div class="thai">
+							<Typography size={2} variant="span" color="primary" weight="bold" align="left">
+								{result.phrase.thai}
+							</Typography>
+							<SpeakButton text={result.phrase.thai} />
+						</div>
+						<Typography size={1} variant="p" color="dark" weight="normal" align="left">
+							{result.phrase.japanese}
+						</Typography>
+						<Stack size={1} variant="ul">
 							{#each result.phrase.words as word}
-								<li><strong>{word.thai}</strong> — {word.meaning}</li>
+								<ListItem symbol="dot">
+									<strong>{word.thai}</strong> — {word.meaning}
+								</ListItem>
 							{/each}
-						</ul>
+						</Stack>
 					</div>
 				</div>
 			{/each}
@@ -148,7 +173,7 @@
 
 	<Spacer size={2} variant="div" />
 
-	<a href="/situations/{situation.id}" class="back-button">シチュエーション詳細に戻る</a>
+	<Button href={paths.situation(situation.id)}>シチュエーション詳細に戻る</Button>
 {/if}
 
 <style>
@@ -159,23 +184,6 @@
 		&:hover {
 			text-decoration: underline;
 		}
-	}
-	.heading {
-		font-size: calc(var(--font-size-5) * 1px);
-		font-weight: 700;
-		color: var(--color-secondary);
-	}
-	.sub-heading {
-		font-size: calc(var(--font-size-3) * 1px);
-		font-weight: 700;
-		color: var(--color-primary);
-	}
-
-	.progress {
-		text-align: center;
-		font-size: calc(var(--font-size-1) * 1px);
-		color: var(--color-dark);
-		font-weight: 700;
 	}
 	.progress-bar {
 		height: 6px;
@@ -197,7 +205,6 @@
 		background-color: var(--color-white);
 		border-radius: calc(var(--border-radius) * 1px);
 		box-shadow: 0 0 calc(var(--spacing-1) * 1px) var(--color-gray);
-
 		border: 1px solid var(--color-gray);
 		text-align: center;
 	}
@@ -207,12 +214,8 @@
 		justify-content: center;
 		flex-wrap: wrap;
 	}
-	.answer-text {
-		font-size: calc(var(--font-size-3) * 1px);
-		color: var(--color-gray);
-	}
 	.listen-button {
-		padding: calc(var(--spacing-1) * 1px) calc(var(--spacing-1) * 1px);
+		padding: calc(var(--spacing-1) * 1px);
 		font-size: calc(var(--font-size-1) * 1px);
 		background: none;
 		border: 1px solid var(--color-gray);
@@ -223,11 +226,6 @@
 		&:hover {
 			background-color: var(--color-primary-5);
 		}
-	}
-	.japanese-prompt {
-		font-size: calc(var(--font-size-4) * 1px);
-		font-weight: 700;
-		color: var(--color-primary);
 	}
 	.input-wrapper {
 		display: flex;
@@ -294,7 +292,6 @@
 			color: var(--color-white);
 		}
 	}
-
 	.score-card {
 		text-align: center;
 		padding: calc(var(--spacing-2) * 1px);
@@ -303,20 +300,6 @@
 		box-shadow: 0 0 calc(var(--spacing-1) * 1px) var(--color-gray);
 		border: 1px solid var(--color-gray);
 	}
-	.score-label {
-		font-size: calc(var(--font-size-1) * 1px);
-		color: var(--color-dark);
-		font-weight: 700;
-	}
-	.score-value {
-		font-size: calc(var(--font-size-5) * 1px);
-		font-weight: 700;
-		color: var(--color-secondary);
-	}
-	.score-divider {
-		color: var(--color-dark);
-		font-weight: 400;
-	}
 	.result-card {
 		display: flex;
 		gap: calc(var(--spacing-1) * 1px);
@@ -324,7 +307,6 @@
 		background-color: var(--color-white);
 		border-radius: calc(var(--border-radius) * 1px);
 		box-shadow: 0 0 calc(var(--spacing-1) * 1px) var(--color-gray);
-
 		border: 1px solid var(--color-gray);
 	}
 	.result-card.correct {
@@ -345,47 +327,5 @@
 		display: flex;
 		align-items: center;
 		gap: calc(var(--spacing-1) * 1px);
-		font-size: calc(var(--font-size-2) * 1px);
-		font-weight: 700;
-		color: var(--color-primary);
-	}
-	.speak-button {
-		background: none;
-		border: 1px solid var(--color-gray);
-		border-radius: calc(var(--border-radius) * 1px);
-		padding: 4px calc(var(--spacing-1) * 1px);
-		cursor: pointer;
-		font-size: calc(var(--font-size-1) * 1px);
-		transition: background-color var(--transition);
-		flex-shrink: 0;
-		&:hover {
-			background-color: var(--color-primary-5);
-		}
-	}
-	.japanese {
-		font-size: calc(var(--font-size-1) * 1px);
-		color: var(--color-dark);
-	}
-	.word-list {
-		display: grid;
-		row-gap: 4px;
-		padding-left: calc(var(--spacing-1) * 1px);
-		font-size: calc(var(--font-size-1) * 1px);
-		color: var(--color-dark);
-	}
-	.back-button {
-		display: block;
-		text-align: center;
-		padding: calc(var(--spacing-1) * 1px);
-		background-color: var(--color-secondary);
-		color: var(--color-white);
-		font-weight: 700;
-		font-size: calc(var(--font-size-2) * 1px);
-		border-radius: calc(var(--border-radius) * 1px);
-		text-decoration: none;
-		transition: opacity var(--transition);
-		&:hover {
-			opacity: 0.8;
-		}
 	}
 </style>

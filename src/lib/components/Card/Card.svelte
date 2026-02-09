@@ -78,7 +78,7 @@
 				top: 50%;
 				left: calc(50% - calc(var(--spacing-1) * 1px));
 				width: 1px;
-				height: calc(100% - calc(var(--spacing-2) * 1px));
+				height: calc(100% - calc(var(--spacing-4) * 1px));
 				background-color: var(--color-gray);
 				translate: 0 -50%;
 			}
