@@ -3,7 +3,7 @@
 	import Stack from '$lib/components/Stack/Stack.svelte';
 	import Typography from '$lib/components/Typography/Typography.svelte';
 	import Card from '$lib/components/Card/Card.svelte';
-	import { paths } from '$lib/const/paths';
+	import { paths } from '$lib/constants/paths';
 	import Button from '$lib/components/Button/Button.svelte';
 
 	let { data }: { data: PageData } = $props();

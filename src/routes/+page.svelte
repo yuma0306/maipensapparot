@@ -1,12 +1,11 @@
 <script lang="ts">
 	import type { PageData } from './$types';
 	import CardImageList from '$lib/components/CardImageList/CardImageList.svelte';
-	import { siteData } from '$lib/const/siteData';
+	import { siteData } from '$lib/constants/siteData';
 	import Stack from '$lib/components/Stack/Stack.svelte';
-	import Spacer from '$lib/components/Spacer/Spacer.svelte';
 	import CardImage from '$lib/components/CardImage/CardImage.svelte';
 	import Typography from '$lib/components/Typography/Typography.svelte';
-	import { paths } from '$lib/const/paths';
+	import { paths } from '$lib/constants/paths';
 	import Break from '$lib/components/Break/Break.svelte';
 
 	let { data }: { data: PageData } = $props();
