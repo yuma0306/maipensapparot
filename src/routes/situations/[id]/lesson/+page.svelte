@@ -46,18 +46,10 @@
 	function handleInput() {
 		checkInput();
 	}
-
-	function speak(text: string) {
-		const utterance = new SpeechSynthesisUtterance(text);
-		utterance.lang = 'th-TH';
-		speechSynthesis.speak(utterance);
-	}
 </script>
 
 {#if !isFinished}
 	<Stack size={2} variant="section">
-		<a href={paths.situation(situation.id)} class="back-link">&larr; 戻る</a>
-
 		<Stack size={1} variant="div">
 			<Typography size={1} variant="p" color="dark" weight="bold" align="center">
 				{currentIndex + 1} / {total}
@@ -72,13 +64,7 @@
 				{currentPhrase.japanese}
 			</Typography>
 			<div class="question-actions">
-				<button
-					onclick={() => speak(currentPhrase.thai)}
-					class="listen-button"
-					aria-label="タイ語の音声を聞く"
-				>
-					🔊 発音を聞く
-				</button>
+				<SpeakButton text={currentPhrase.thai} />
 				<button
 					onclick={() => (showAnswer = !showAnswer)}
 					class="listen-button"
@@ -125,9 +111,7 @@
 			結果 — {situation.title}
 		</Typography>
 		<div class="score-card">
-			<Typography size={1} variant="p" color="dark" weight="bold" align="center">
-				スコア
-			</Typography>
+			<Typography size={1} variant="p" color="dark" weight="bold" align="center">スコア</Typography>
 			<Typography size={5} variant="p" color="secondary" weight="bold" align="center">
 				{correctCount}
 				<Typography size={5} variant="span" color="dark" weight="normal" align="center">
@@ -141,9 +125,6 @@
 	<Spacer size={2} variant="div" />
 
 	<Stack size={1} variant="section">
-		<Typography size={3} variant="h2" color="primary" weight="bold" align="left">
-			回答一覧
-		</Typography>
 		<Stack size={1} variant="div">
 			{#each results as result}
 				<div class="result-card" class:correct={result.correct} class:incorrect={!result.correct}>
@@ -177,14 +158,6 @@
 {/if}
 
 <style>
-	.back-link {
-		font-size: calc(var(--font-size-1) * 1px);
-		color: var(--color-dark);
-		text-decoration: none;
-		&:hover {
-			text-decoration: underline;
-		}
-	}
 	.progress-bar {
 		height: 6px;
 		background-color: var(--color-primary-10);

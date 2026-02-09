@@ -31,8 +31,19 @@
 
 <style>
 	.icon {
-		width: 20px;
-		height: 20px;
+		display: block;
 		fill: var(--color-secondary);
+	}
+	@media (min-width: 640px) {
+		.icon {
+			width: calc(var(--spacing-2) * 1px);
+			height: calc(var(--spacing-2) * 1px);
+		}
+	}
+	@media (max-width: 639px) {
+		.icon {
+			width: calc(var(--calc-sp) * var(--spacing-2));
+			height: calc(var(--calc-sp) * var(--spacing-2));
+		}
 	}
 </style>
