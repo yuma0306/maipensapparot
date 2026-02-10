@@ -16,8 +16,9 @@
 	.list {
 		display: grid;
 		width: 100%;
+		justify-content: center;
 		@media (min-width: 640px) {
-			grid-template-columns: repeat(6, 1fr);
+			grid-template-columns: repeat(auto-fit, max(227px));
 			gap: calc(var(--spacing-2) * 1px);
 		}
 		@media (max-width: 639px) {
