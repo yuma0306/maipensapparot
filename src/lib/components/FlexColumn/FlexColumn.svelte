@@ -1,0 +1,88 @@
+<script lang="ts">
+	import type { Snippet } from 'svelte';
+
+	type Props = {
+		children: Snippet;
+		gap: 1 | 2 | 3 | 4 | 5;
+		variant: 'dt' | 'div';
+		alignItems: 'start' | 'center' | 'end' | 'stretch';
+		justifyContent: 'start' | 'center' | 'end';
+	};
+
+	let { children, gap, variant, alignItems = 'start', justifyContent = 'start' }: Props = $props();
+</script>
+
+<svelte:element
+	this={variant}
+	class="column"
+	data-gap={gap}
+	data-align-items={alignItems}
+	data-justify-content={justifyContent}
+>
+	{@render children()}
+</svelte:element>
+
+<style>
+	.column {
+		display: flex;
+		&[data-align-items='start'] {
+			align-items: start;
+		}
+		&[data-align-items='center'] {
+			align-items: center;
+		}
+		&[data-align-items='end'] {
+			align-items: end;
+		}
+		&[data-align-items='stretch'] {
+			align-items: stretch;
+		}
+		&[data-justify-content='start'] {
+			justify-content: start;
+		}
+		&[data-justify-content='center'] {
+			justify-content: center;
+		}
+		&[data-justify-content='end'] {
+			justify-content: end;
+		}
+	}
+	@media (min-width: 640px) {
+		.column {
+			&[data-gap='1'] {
+				column-gap: calc(var(--spacing-1) * 1px);
+			}
+			&[data-gap='2'] {
+				column-gap: calc(var(--spacing-2) * 1px);
+			}
+			&[data-gap='3'] {
+				column-gap: calc(var(--spacing-3) * 1px);
+			}
+			&[data-gap='4'] {
+				column-gap: calc(var(--spacing-4) * 1px);
+			}
+			&[data-gap='5'] {
+				column-gap: calc(var(--spacing-5) * 1px);
+			}
+		}
+	}
+	@media (max-width: 639px) {
+		.column {
+			&[data-gap='1'] {
+				column-gap: calc(var(--calc-sp) * var(--spacing-1));
+			}
+			&[data-gap='2'] {
+				column-gap: calc(var(--calc-sp) * var(--spacing-2));
+			}
+			&[data-gap='3'] {
+				column-gap: calc(var(--calc-sp) * var(--spacing-3));
+			}
+			&[data-gap='4'] {
+				column-gap: calc(var(--calc-sp) * var(--spacing-4));
+			}
+			&[data-gap='5'] {
+				column-gap: calc(var(--calc-sp) * var(--spacing-5));
+			}
+		}
+	}
+</style>

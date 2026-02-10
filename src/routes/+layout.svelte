@@ -5,7 +5,6 @@
 	import Main from '$lib/components/Main/Main.svelte';
 	import Footer from '$lib/components/Footer/Footer.svelte';
 	import Header from '$lib/components/Header/Header.svelte';
-	import Inner from '$lib/components/Inner/Inner.svelte';
 
 	let { children, data } = $props();
 </script>
@@ -17,9 +16,7 @@
 <Wrapper>
 	<Header />
 	<Main>
-		<Inner>
-			{@render children()}
-		</Inner>
+		{@render children()}
 	</Main>
 	<Footer year={data.year} />
 </Wrapper>

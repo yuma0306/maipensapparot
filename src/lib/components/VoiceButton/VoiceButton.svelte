@@ -23,9 +23,8 @@
 	.button {
 		display: grid;
 		place-content: center;
-		background-color: var(--color-secondary-10);
-		color: var(--color-secondary);
-		border: 1px solid var(--color-secondary);
+		background-color: var(--color-primary-10);
+		border: 1px solid var(--color-primary);
 		transition: opacity var(--transition);
 		line-height: 1;
 		&:hover {
