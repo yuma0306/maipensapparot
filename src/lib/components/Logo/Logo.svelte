@@ -2,7 +2,7 @@
 	import { siteData } from '$lib/constants/siteData';
 </script>
 
-<a class="logo" href="/">{siteData.title}</a>
+<a class="logo" href="/">🍍{siteData.siteName}</a>
 
 <style>
 	.logo {
