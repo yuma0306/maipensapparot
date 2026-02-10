@@ -22,14 +22,16 @@
 
 <style>
 	.card {
+		border-style: solid;
+		border-width: 1px;
 		&[data-border-color='gray'] {
-			border: 1px solid var(--color-gray);
+			border-color: var(--color-gray);
 		}
 		&[data-border-color='success'] {
-			border: 1px solid var(--color-success);
+			border-color: var(--color-success);
 		}
 		&[data-border-color='danger'] {
-			border: 1px solid var(--color-danger);
+			border-color: var(--color-danger);
 		}
 	}
 	@media (min-width: 640px) {
@@ -38,7 +40,7 @@
 			border-radius: calc(var(--border-radius) * 1px);
 			box-shadow: 0 0 calc(var(--spacing-1) * 1px) var(--color-gray);
 			&[data-has-border-left='true'] {
-				border-left: calc(var(--spacing-1) * 1px) solid var(--color-gray);
+				border-left-width: calc(var(--spacing-1) * 1px);
 			}
 		}
 	}
@@ -48,7 +50,7 @@
 			border-radius: calc(var(--calc-sp) * var(--border-radius));
 			box-shadow: 0 0 calc(var(--calc-sp) * var(--spacing-1)) var(--color-gray);
 			&[data-has-border-left='true'] {
-				border-left: calc(var(--calc-sp) * var(--spacing-1)) solid var(--color-gray);
+				border-left-width: calc(var(--calc-sp) * var(--spacing-1));
 			}
 		}
 	}

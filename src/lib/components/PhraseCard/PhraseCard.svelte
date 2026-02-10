@@ -8,8 +8,6 @@
 
 	type CardProps = {
 		phrase: Phrase;
-		borderColor: 'gray' | 'success' | 'danger';
-		hasBorderLeft: boolean;
 	};
 
 	let { phrase }: CardProps = $props();

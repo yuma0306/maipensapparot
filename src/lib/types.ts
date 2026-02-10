@@ -11,12 +11,6 @@ export interface Phrase {
 	words: Word[];
 }
 
-interface Thumbnail {
-	url: string;
-	height: number;
-	width: number;
-}
-
 export interface Situation {
 	id: string;
 	title: string;

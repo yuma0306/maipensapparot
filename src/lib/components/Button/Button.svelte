@@ -1,17 +1,21 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
+	import type { HTMLAnchorAttributes, HTMLButtonAttributes } from 'svelte/elements';
 
-	type Props = {
-		href: string;
+	type CommonProps = {
+		variant: 'a' | 'button';
 		children: Snippet;
+		color: 'secondary' | 'success';
 	};
 
-	let { href, children }: Props = $props();
+	type Props = CommonProps & (HTMLAnchorAttributes | HTMLButtonAttributes);
+
+	let { children, variant, color, ...restProps }: Props = $props();
 </script>
 
-<a {href} class="button">
+<svelte:element this={variant} class="button" data-color={color} {...restProps}>
 	{@render children()}
-</a>
+</svelte:element>
 
 <style>
 	.button {
@@ -26,14 +30,20 @@
 		&:hover {
 			opacity: var(--opacity);
 		}
+		&[data-color='secondary'] {
+			background-color: var(--color-secondary);
+		}
+		&[data-color='success'] {
+			background-color: var(--color-success);
+		}
 	}
 	@media (min-width: 640px) {
 		.button {
 			width: min(100%, 400px);
 			border-radius: calc(var(--border-radius) * 1px);
-		padding: calc(var(--spacing-2) * 1px);
-		font-size: calc(var(--font-size-2) * 1px);
-	}
+			padding: calc(var(--spacing-2) * 1px);
+			font-size: calc(var(--font-size-2) * 1px);
+		}
 	}
 	@media (max-width: 639px) {
 		.button {

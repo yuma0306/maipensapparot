@@ -17,11 +17,13 @@
 		<Typography size={5} variant="h1" color="secondary" weight="bold" align="center">
 			{situation.title}
 		</Typography>
-		<Button href={`${paths.lesson(situation.id).toString()}`}>レッスンをスタート</Button>
+		<Button color="secondary" variant="a" href={`${paths.lesson(situation.id)}`}>
+			レッスンをスタート
+		</Button>
 		<Stack size={2} variant="ul">
 			{#each situation.phrases as phrase}
 				<Card variant="li" borderColor="gray" hasBorderLeft={true}>
-					<PhraseCard {phrase} hasBorderLeft={true} borderColor="gray" />
+					<PhraseCard {phrase} />
 				</Card>
 			{/each}
 		</Stack>
