@@ -18,7 +18,7 @@
 			{situation.title}
 		</Typography>
 		<Button href={`${paths.lesson(situation.id).toString()}`}>レッスンをスタート</Button>
-		<Stack size={3} variant="ul">
+		<Stack size={2} variant="ul">
 			{#each situation.phrases as phrase}
 				<Card variant="li" borderColor="gray" hasBorderLeft={true}>
 					<PhraseCard {phrase} hasBorderLeft={true} borderColor="gray" />

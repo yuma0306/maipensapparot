@@ -2,7 +2,6 @@
 	import type { LessonResult } from '$lib/types';
 	import type { PageProps } from './$types';
 	import Stack from '$lib/components/Stack/Stack.svelte';
-	import Spacer from '$lib/components/Spacer/Spacer.svelte';
 	import Typography from '$lib/components/Typography/Typography.svelte';
 	import Button from '$lib/components/Button/Button.svelte';
 	import ListItem from '$lib/components/ListItem/ListItem.svelte';
@@ -12,6 +11,8 @@
 	import Progress from '$lib/components/Progress/Progress.svelte';
 	import Inner from '$lib/components/Inner/Inner.svelte';
 	import SkipButton from '$lib/components/SkipButton/SkipButton.svelte';
+	import ScoreCard from '$lib/components/ScoreCard/ScoreCard.svelte';
+	import Input from '$lib/components/Input/Input.svelte';
 
 	let props: PageProps = $props();
 	const situation = $derived(props.data.situation);
@@ -63,22 +64,9 @@
 			</Stack>
 			<QuestionCard japanese={currentPhrase.japanese} thai={currentPhrase.thai} {showAnswer} />
 			<Stack size={1} variant="div">
-				<div class="input-wrapper" class:correct-input={isCorrect}>
-					{#if isCorrect}
-						<span class="correct-mark">⭕</span>
-					{/if}
-					<input
-						type="text"
-						class="text-input"
-						bind:value={userInput}
-						oninput={handleInput}
-						placeholder="タイ語を入力..."
-						lang="th"
-						disabled={isCorrect}
-					/>
-				</div>
-
+				<Input {isCorrect} bind:userInput {handleInput} />
 				{#if isCorrect}
+					<Button onclick={advance}>次へ進む</Button>
 					<button onclick={advance} class="next-button">次へ進む</button>
 				{/if}
 			</Stack>
@@ -88,25 +76,11 @@
 		<SkipButton onclick={skipPhrase} />
 	{/if}
 {:else}
-	<Stack size={1} variant="section">
+	<Inner>
 		<Typography size={5} variant="h1" color="secondary" weight="bold" align="center">
 			結果
 		</Typography>
-		<div class="score-card">
-			<Typography size={1} variant="p" color="dark" weight="bold" align="center">スコア</Typography>
-			<Typography size={5} variant="p" color="secondary" weight="bold" align="center">
-				{correctCount}
-				<Typography size={5} variant="span" color="dark" weight="normal" align="center">
-					/
-				</Typography>
-				{total}
-			</Typography>
-		</div>
-	</Stack>
-
-	<Spacer size={2} variant="div" />
-
-	<Stack size={1} variant="section">
+		<ScoreCard score={correctCount} {total} />
 		<Stack size={1} variant="div">
 			{#each results as result}
 				<div class="result-card" class:correct={result.correct} class:incorrect={!result.correct}>
@@ -132,46 +106,12 @@
 				</div>
 			{/each}
 		</Stack>
-	</Stack>
 
-	<Spacer size={2} variant="div" />
-
-	<Button href={paths.situation(situation.id)}>戻る</Button>
+		<Button href={paths.situation(situation.id)}>戻る</Button>
+	</Inner>
 {/if}
 
 <style>
-	.input-wrapper {
-		display: flex;
-		align-items: center;
-		gap: calc(var(--spacing-1) * 1px);
-		border: 2px solid var(--color-gray);
-		border-radius: calc(var(--border-radius) * 1px);
-		transition:
-			border-color var(--transition),
-			background-color var(--transition);
-		&:focus-within {
-			border-color: var(--color-secondary);
-		}
-	}
-	.input-wrapper.correct-input {
-		border-color: var(--color-success);
-		background-color: color-mix(in srgb, var(--color-success) 5%, #fff);
-	}
-	.correct-mark {
-		padding-left: calc(var(--spacing-1) * 1px);
-		font-size: calc(var(--font-size-3) * 1px);
-		flex-shrink: 0;
-	}
-	.text-input {
-		width: 100%;
-		padding: calc(var(--spacing-1) * 1px);
-		font-size: calc(var(--font-size-2) * 1px);
-		border: none;
-		border-radius: calc(var(--border-radius) * 1px);
-		outline: none;
-		background: transparent;
-		font-family: var(--font-family);
-	}
 	.next-button {
 		width: 100%;
 		padding: calc(var(--spacing-1) * 1px);
@@ -186,14 +126,6 @@
 		&:hover {
 			opacity: 0.8;
 		}
-	}
-	.score-card {
-		text-align: center;
-		padding: calc(var(--spacing-2) * 1px);
-		background-color: var(--color-white);
-		border-radius: calc(var(--border-radius) * 1px);
-		box-shadow: 0 0 calc(var(--spacing-1) * 1px) var(--color-gray);
-		border: 1px solid var(--color-gray);
 	}
 	.result-card {
 		display: flex;

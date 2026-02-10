@@ -22,9 +22,6 @@
 
 <style>
 	.card {
-		position: relative;
-		display: grid;
-		align-items: center;
 		&[data-border-color='gray'] {
 			border: 1px solid var(--color-gray);
 		}
