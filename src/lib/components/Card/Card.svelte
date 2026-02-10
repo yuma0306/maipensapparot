@@ -2,7 +2,7 @@
 	import type { Snippet } from 'svelte';
 
 	type CardProps = {
-		borderColor: 'gray' | 'success' | 'danger';
+		borderColor: 'gray' | 'success' | 'warning';
 		hasBorderLeft: boolean;
 		children: Snippet;
 		variant: 'li' | 'div';
@@ -30,8 +30,8 @@
 		&[data-border-color='success'] {
 			border-color: var(--color-success);
 		}
-		&[data-border-color='danger'] {
-			border-color: var(--color-danger);
+		&[data-border-color='warning'] {
+			border-color: var(--color-warning);
 		}
 	}
 	@media (min-width: 640px) {

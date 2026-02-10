@@ -58,7 +58,7 @@
 				</Typography>
 				<Progress value={currentIndex} max={total} />
 			</Stack>
-			<QuestionCard japanese={currentPhrase.japanese} thai={currentPhrase.thai} {showAnswer} />
+			<QuestionCard japanese={currentPhrase.japanese} thai={currentPhrase.thai} bind:showAnswer />
 			<Input {isCorrect} bind:userInput handleInput={checkInput} />
 			{#if isCorrect}
 				<Button variant="button" color="success" onclick={advance}>次へ進む</Button>
@@ -79,7 +79,7 @@
 				{#each results as result}
 					<Card
 						variant="li"
-						borderColor={result.correct ? 'success' : 'danger'}
+						borderColor={result.correct ? 'success' : 'warning'}
 						hasBorderLeft={true}
 					>
 						<PhraseCard phrase={result.phrase} />

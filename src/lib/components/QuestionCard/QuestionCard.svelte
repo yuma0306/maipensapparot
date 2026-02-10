@@ -11,7 +11,7 @@
 		showAnswer: boolean;
 	};
 
-	let { japanese, thai, showAnswer }: Props = $props();
+	let { japanese, thai, showAnswer = $bindable() }: Props = $props();
 </script>
 
 <Card variant="div" borderColor="gray" hasBorderLeft={false}>

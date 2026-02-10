@@ -9,10 +9,10 @@
 	--color-secondary-10: color-mix(in srgb, var(--color-secondary) 10%, var(--color-white));
 	--color-success: #28a745;
 	--color-success-10: color-mix(in srgb, var(--color-success) 10%, var(--color-white));
-	--color-danger: #dc3545;
-	--color-danger-10: color-mix(in srgb, var(--color-danger) 10%, var(--color-white));
 	--color-input: #3b82f6;
 	--color-input-10: color-mix(in srgb, var(--color-input) 10%, var(--color-white));
+	--color-warning: #ffc107;
+	--color-warning-10: color-mix(in srgb, var(--color-warning) 10%, var(--color-white));
 
 	/* フォントサイズ */
 	--font-size-1: 12;
