@@ -14,6 +14,7 @@
 
 <style>
 	.main {
+		position: relative;
 		flex: 1;
 		background-color: var(--color-primary-5);
 	}

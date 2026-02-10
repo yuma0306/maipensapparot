@@ -6,21 +6,24 @@
 	import Button from '$lib/components/Button/Button.svelte';
 	import PhraseCard from '$lib/components/PhraseCard/PhraseCard.svelte';
 	import Card from '$lib/components/Card/Card.svelte';
+	import Inner from '$lib/components/Inner/Inner.svelte';
 
 	let { data }: { data: PageData } = $props();
 	const situation = $derived(data.situation);
 </script>
 
-<Stack size={3} variant="section">
-	<Typography size={5} variant="h1" color="secondary" weight="bold" align="center">
-		{situation.title}
-	</Typography>
-	<Button href={`${paths.lesson(situation.id).toString()}`}>レッスンをスタート</Button>
-	<Stack size={3} variant="ul">
-		{#each situation.phrases as phrase}
-			<Card variant="li" borderColor="gray" hasBorderLeft={true}>
-				<PhraseCard {phrase} hasBorderLeft={true} borderColor="gray" />
-			</Card>
-		{/each}
+<Inner>
+	<Stack size={3} variant="section">
+		<Typography size={5} variant="h1" color="secondary" weight="bold" align="center">
+			{situation.title}
+		</Typography>
+		<Button href={`${paths.lesson(situation.id).toString()}`}>レッスンをスタート</Button>
+		<Stack size={3} variant="ul">
+			{#each situation.phrases as phrase}
+				<Card variant="li" borderColor="gray" hasBorderLeft={true}>
+					<PhraseCard {phrase} hasBorderLeft={true} borderColor="gray" />
+				</Card>
+			{/each}
+		</Stack>
 	</Stack>
-</Stack>
+</Inner>

@@ -9,6 +9,9 @@
 	import { paths } from '$lib/constants/paths';
 	import VoiceButton from '$lib/components/VoiceButton/VoiceButton.svelte';
 	import QuestionCard from '$lib/components/QuestionCard/QuestionCard.svelte';
+	import Progress from '$lib/components/Progress/Progress.svelte';
+	import Inner from '$lib/components/Inner/Inner.svelte';
+	import SkipButton from '$lib/components/SkipButton/SkipButton.svelte';
 
 	let props: PageProps = $props();
 	const situation = $derived(props.data.situation);
@@ -50,47 +53,44 @@
 </script>
 
 {#if !isFinished}
-	<Stack size={3} variant="section">
-		<Stack size={1} variant="div">
-			<Typography size={1} variant="p" color="dark" weight="bold" align="center">
-				{currentIndex + 1} / {total}
-			</Typography>
-			<div class="progress-bar">
-				<div class="progress-fill" style="width: {(currentIndex / total) * 100}%"></div>
-			</div>
-		</Stack>
+	<Inner>
+		<Stack size={3} variant="section">
+			<Stack size={1} variant="div">
+				<Typography size={1} variant="p" color="dark" weight="bold" align="center">
+					{currentIndex + 1} / {total}
+				</Typography>
+				<Progress value={currentIndex} max={total} />
+			</Stack>
+			<QuestionCard japanese={currentPhrase.japanese} thai={currentPhrase.thai} {showAnswer} />
+			<Stack size={1} variant="div">
+				<div class="input-wrapper" class:correct-input={isCorrect}>
+					{#if isCorrect}
+						<span class="correct-mark">⭕</span>
+					{/if}
+					<input
+						type="text"
+						class="text-input"
+						bind:value={userInput}
+						oninput={handleInput}
+						placeholder="タイ語を入力..."
+						lang="th"
+						disabled={isCorrect}
+					/>
+				</div>
 
-		<QuestionCard japanese={currentPhrase.japanese} thai={currentPhrase.thai} {showAnswer} />
-
-		<Stack size={1} variant="div">
-			<div class="input-wrapper" class:correct-input={isCorrect}>
 				{#if isCorrect}
-					<span class="correct-mark">⭕</span>
+					<button onclick={advance} class="next-button">次へ進む</button>
 				{/if}
-				<input
-					type="text"
-					class="text-input"
-					bind:value={userInput}
-					oninput={handleInput}
-					placeholder="タイ語を入力..."
-					lang="th"
-					disabled={isCorrect}
-				/>
-			</div>
-
-			{#if !isCorrect}
-				<button onclick={skipPhrase} class="skip-button">スキップ（不正解扱い）</button>
-			{/if}
-
-			{#if isCorrect}
-				<button onclick={advance} class="next-button">次へ進む</button>
-			{/if}
+			</Stack>
 		</Stack>
-	</Stack>
+	</Inner>
+	{#if !isCorrect}
+		<SkipButton onclick={skipPhrase} />
+	{/if}
 {:else}
 	<Stack size={1} variant="section">
 		<Typography size={5} variant="h1" color="secondary" weight="bold" align="center">
-			結果 — {situation.title}
+			結果
 		</Typography>
 		<div class="score-card">
 			<Typography size={1} variant="p" color="dark" weight="bold" align="center">スコア</Typography>
@@ -136,22 +136,10 @@
 
 	<Spacer size={2} variant="div" />
 
-	<Button href={paths.situation(situation.id)}>シチュエーション詳細に戻る</Button>
+	<Button href={paths.situation(situation.id)}>戻る</Button>
 {/if}
 
 <style>
-	.progress-bar {
-		height: 6px;
-		background-color: var(--color-primary-10);
-		border-radius: 3px;
-		overflow: hidden;
-	}
-	.progress-fill {
-		height: 100%;
-		background-color: var(--color-secondary);
-		border-radius: 3px;
-		transition: width var(--transition);
-	}
 	.input-wrapper {
 		display: flex;
 		align-items: center;
@@ -197,24 +185,6 @@
 		transition: opacity var(--transition);
 		&:hover {
 			opacity: 0.8;
-		}
-	}
-	.skip-button {
-		width: 100%;
-		padding: calc(var(--spacing-1) * 1px);
-		font-size: calc(var(--font-size-1) * 1px);
-		font-weight: 700;
-		border: 2px solid var(--color-dark);
-		border-radius: calc(var(--border-radius) * 1px);
-		background: none;
-		color: var(--color-dark);
-		cursor: pointer;
-		transition:
-			background-color var(--transition),
-			color var(--transition);
-		&:hover {
-			background-color: var(--color-primary);
-			color: var(--color-white);
 		}
 	}
 	.score-card {

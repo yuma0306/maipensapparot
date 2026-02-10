@@ -36,9 +36,10 @@
 <style>
 	.button {
 		background: var(--color-primary-10);
-		border: 1px solid var(--color-gray);
-		color: var(--color-dark);
+		border: 1px solid var(--color-primary);
+		color: var(--color-primary);
 		transition: opacity var(--transition);
+		font-weight: 700;
 		&:hover {
 			opacity: var(--opacity);
 		}
