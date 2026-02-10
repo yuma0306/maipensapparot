@@ -1,67 +1,39 @@
 <script lang="ts">
-	import type { HTMLAnchorAttributes, HTMLAttributes } from 'svelte/elements';
+	import type { HTMLAnchorAttributes } from 'svelte/elements';
 	import type { Situation } from '$lib/types';
+	import type { Component } from 'svelte';
+	import EatingIcon from '$lib/components/Icon/EatingIcon.svelte';
+	import KrakenIcon from '$lib/components/Icon/KrakenIcon.svelte';
 
-	type CommonProps = {
+	type Props = {
 		id: Situation['id'];
 		title: Situation['title'];
-		description: Situation['description'];
-		thumbnail: Situation['thumbnail'];
+	} & HTMLAnchorAttributes;
+
+	let { id, title, ...restProps }: Props = $props();
+
+	const iconMap: Record<string, Component> = {
+		eating: EatingIcon
 	};
 
-	type CardLinkProps = {
-		variant: 'a';
-	} & CommonProps &
-		HTMLAnchorAttributes;
-
-	type CardDivProps = {
-		variant: 'div';
-	} & CommonProps &
-		HTMLAttributes<HTMLDivElement>;
-
-	type CardProps = CardLinkProps | CardDivProps;
-
-	let props: CardProps = $props();
+	const Icon = $derived(iconMap[id] ?? KrakenIcon);
 </script>
 
-<svelte:element this={props.variant} class="card" {...props}>
-	<div class="card__head">
-		<img
-			class="card__image"
-			src={props.thumbnail.url}
-			alt={props.title}
-			width={props.thumbnail.width}
-			height={props.thumbnail.height}
-		/>
-	</div>
-	<p class="card__title">{props.title}</p>
-	<p class="card__description">{props.description}</p>
-</svelte:element>
+<a class="card" {...restProps}>
+	<Icon />
+	<p class="card__title">{title}</p>
+</a>
 
 <style>
 	.card {
 		display: grid;
 		grid-template-rows: subgrid;
-		grid-row: span 4;
+		grid-row: span 2;
+		place-content: center;
+		place-items: center;
 		background-color: var(--color-white);
 		border: 1px solid var(--color-gray);
 		overflow: hidden;
-		&:hover {
-			.card__image {
-				scale: var(--scale);
-			}
-		}
-	}
-	.card__head {
-		overflow: hidden;
-	}
-	.card__image {
-		display: block;
-		object-fit: cover;
-		aspect-ratio: 2;
-		height: 100%;
-		width: 100%;
-		transition: scale var(--transition);
 	}
 	.card__title {
 		color: var(--color-secondary);
@@ -70,40 +42,26 @@
 		-webkit-line-clamp: 2;
 		-webkit-box-orient: vertical;
 		overflow: hidden;
-	}
-	.card__description {
-		display: -webkit-box;
-		-webkit-line-clamp: 2;
-		-webkit-box-orient: vertical;
-		overflow: hidden;
+		align-self: start;
 	}
 	@media (min-width: 640px) {
 		.card {
 			border-radius: calc(var(--border-radius) * 1px);
 			box-shadow: 0 0 calc(var(--spacing-1) * 1px) var(--color-gray);
+			padding: calc(var(--spacing-2) * 1px);
 		}
 		.card__title {
 			font-size: calc(var(--font-size-3) * 1px);
-			padding-inline: calc(var(--spacing-2) * 1px);
-		}
-		.card__description {
-			font-size: calc(var(--font-size-2) * 1px);
-			padding-inline: calc(var(--spacing-2) * 1px);
 		}
 	}
 	@media (max-width: 639px) {
 		.card {
-			row-gap: calc(var(--calc-sp) * var(--spacing-2));
 			border-radius: calc(var(--calc-sp) * var(--border-radius));
 			box-shadow: 0 0 calc(var(--calc-sp) * var(--spacing-1)) var(--color-gray);
+			padding: calc(var(--calc-sp) * var(--spacing-2));
 		}
 		.card__title {
 			font-size: calc(var(--calc-sp) * var(--font-size-3));
-			padding-inline: calc(var(--calc-sp) * var(--spacing-2));
-		}
-		.card__description {
-			font-size: calc(var(--calc-sp) * var(--font-size-2));
-			padding-inline: calc(var(--calc-sp) * var(--spacing-2));
 		}
 	}
 </style>

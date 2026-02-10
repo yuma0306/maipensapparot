@@ -20,8 +20,6 @@ interface Thumbnail {
 export interface Situation {
 	id: string;
 	title: string;
-	description: string;
-	thumbnail: Thumbnail;
 	phrases: Phrase[];
 }
 

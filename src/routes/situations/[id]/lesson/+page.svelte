@@ -8,7 +8,6 @@
 	import ListItem from '$lib/components/ListItem/ListItem.svelte';
 	import { paths } from '$lib/constants/paths';
 	import VoiceButton from '$lib/components/VoiceButton/VoiceButton.svelte';
-	import Card from '$lib/components/Card/Card.svelte';
 	import QuestionCard from '$lib/components/QuestionCard/QuestionCard.svelte';
 
 	let props: PageProps = $props();

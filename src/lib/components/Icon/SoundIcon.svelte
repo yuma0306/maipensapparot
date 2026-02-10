@@ -32,7 +32,7 @@
 <style>
 	.icon {
 		display: block;
-		fill: var(--color-secondary);
+		fill: var(--color-primary);
 	}
 	@media (min-width: 640px) {
 		.icon {

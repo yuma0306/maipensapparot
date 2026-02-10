@@ -32,7 +32,7 @@
 			{#each phrase.words as word}
 				<ListItem symbol="none">
 					<FlexColumn gap={1} variant="div" alignItems="center" justifyContent="start">
-						<Typography size={2} variant="span" color="dark" weight="bold" align="left">
+						<Typography size={2} variant="span" color="primary" weight="bold" align="left">
 							{word.thai}
 						</Typography>
 						<Typography size={2} variant="span" color="dark" weight="normal" align="left">

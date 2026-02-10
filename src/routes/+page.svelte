@@ -21,14 +21,7 @@
 	</Typography>
 	<CardImageList>
 		{#each situations as situation}
-			<CardImage
-				variant="a"
-				href={paths.situation(situation.id)}
-				id={situation.id}
-				title={situation.title}
-				description={situation.description}
-				thumbnail={situation.thumbnail}
-			/>
+			<CardImage id={situation.id} href={paths.situation(situation.id)} title={situation.title} />
 		{/each}
 	</CardImageList>
 </Stack>
