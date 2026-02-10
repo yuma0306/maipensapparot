@@ -1,13 +1,11 @@
 <script lang="ts">
 	import Inner from '$lib/components/Inner/Inner.svelte';
 	import { siteData } from '$lib/constants/siteData';
-
-	let { year } = $props();
 </script>
 
 <footer class="footer">
 	<Inner>
-		<small class="footer__text">&copy; {year} {siteData.title}</small>
+		<small class="footer__text">&copy; {new Date().getFullYear()} 🍍{siteData.siteName}</small>
 	</Inner>
 </footer>
 

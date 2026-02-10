@@ -1,5 +1,7 @@
-const title = '🍍マイペンサッパロット';
+const siteName = 'マイペンサッパロット';
+const domain = 'maipensapparot.vercel.app';
 
 export const siteData = {
-	title
+	siteName,
+	domain
 };
