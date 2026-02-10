@@ -1,5 +1,14 @@
-const title = '🍍マイペンサッパロット';
+const siteName = 'マイペンサッパロット';
+const domain = 'maipensapparot.vercel.app';
+
+const commonMetaData = {
+	description: `${siteName}`,
+	suffix: ` | ${siteName}`,
+	ogImage: `https://${domain}/ogp.png`
+};
 
 export const siteData = {
-	title
+	siteName,
+	commonMetaData,
+	domain
 };

@@ -16,7 +16,7 @@
 <Inner>
 	<Stack size={3} variant="section">
 		<Typography size={5} variant="h1" color="secondary" weight="bold" align="center">
-			{siteData.title}へ<Break media="onlySp" />ようこそ
+			🍍{siteData.siteName}へ<Break media="onlySp" />ようこそ
 		</Typography>
 		<Typography size={2} variant="p" color="dark" weight="normal" align="center">
 			シチュエーションを選んで学習を始めましょう
