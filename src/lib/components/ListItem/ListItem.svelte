@@ -38,7 +38,7 @@
 		}
 		&[data-symbol='none'] {
 			&::before {
-				content: '';
+				content: none;
 			}
 		}
 	}

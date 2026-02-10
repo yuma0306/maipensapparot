@@ -8,6 +8,8 @@
 	import ListItem from '$lib/components/ListItem/ListItem.svelte';
 	import { paths } from '$lib/constants/paths';
 	import VoiceButton from '$lib/components/VoiceButton/VoiceButton.svelte';
+	import Card from '$lib/components/Card/Card.svelte';
+	import QuestionCard from '$lib/components/QuestionCard/QuestionCard.svelte';
 
 	let props: PageProps = $props();
 	const situation = $derived(props.data.situation);
@@ -49,7 +51,7 @@
 </script>
 
 {#if !isFinished}
-	<Stack size={2} variant="section">
+	<Stack size={3} variant="section">
 		<Stack size={1} variant="div">
 			<Typography size={1} variant="p" color="dark" weight="bold" align="center">
 				{currentIndex + 1} / {total}
@@ -59,26 +61,7 @@
 			</div>
 		</Stack>
 
-		<div class="question-card">
-			<Typography size={4} variant="p" color="primary" weight="bold" align="center">
-				{currentPhrase.japanese}
-			</Typography>
-			<div class="question-actions">
-				<VoiceButton text={currentPhrase.thai} />
-				<button
-					onclick={() => (showAnswer = !showAnswer)}
-					class="listen-button"
-					aria-label="回答を見る"
-				>
-					{showAnswer ? '🙈 回答を隠す' : '👀 回答を見る'}
-				</button>
-			</div>
-			{#if showAnswer}
-				<Typography size={3} variant="p" color="gray" weight="normal" align="center">
-					{currentPhrase.thai}
-				</Typography>
-			{/if}
-		</div>
+		<QuestionCard japanese={currentPhrase.japanese} thai={currentPhrase.thai} {showAnswer} />
 
 		<Stack size={1} variant="div">
 			<div class="input-wrapper" class:correct-input={isCorrect}>
@@ -169,36 +152,6 @@
 		background-color: var(--color-secondary);
 		border-radius: 3px;
 		transition: width var(--transition);
-	}
-	.question-card {
-		display: grid;
-		justify-items: center;
-		row-gap: calc(var(--spacing-1) * 1px);
-		padding: calc(var(--spacing-2) * 1px) calc(var(--spacing-1) * 1px);
-		background-color: var(--color-white);
-		border-radius: calc(var(--border-radius) * 1px);
-		box-shadow: 0 0 calc(var(--spacing-1) * 1px) var(--color-gray);
-		border: 1px solid var(--color-gray);
-		text-align: center;
-	}
-	.question-actions {
-		display: flex;
-		gap: calc(var(--spacing-1) * 1px);
-		justify-content: center;
-		flex-wrap: wrap;
-	}
-	.listen-button {
-		padding: calc(var(--spacing-1) * 1px);
-		font-size: calc(var(--font-size-2) * 1px);
-		background: var(--color-primary-10);
-		border: 1px solid var(--color-gray);
-		border-radius: calc(var(--border-radius) * 1px);
-		cursor: pointer;
-		color: var(--color-dark);
-		transition: background-color var(--transition);
-		&:hover {
-			background-color: var(--color-primary-5);
-		}
 	}
 	.input-wrapper {
 		display: flex;
