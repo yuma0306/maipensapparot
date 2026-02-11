@@ -24,6 +24,11 @@
 		<Typography size={2} variant="dd" color="dark" weight="normal" align="left">
 			{phrase.japanese}
 		</Typography>
+		{#if phrase.english}
+			<Typography size={2} variant="span" color="dark" weight="normal" align="left">
+				{phrase.english}
+			</Typography>
+		{/if}
 	</Stack>
 	<div class="footer">
 		<Stack size={2} variant="ul">

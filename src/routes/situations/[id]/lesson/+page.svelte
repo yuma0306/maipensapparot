@@ -58,7 +58,12 @@
 				</Typography>
 				<Progress value={currentIndex} max={total} />
 			</Stack>
-			<QuestionCard japanese={currentPhrase.japanese} thai={currentPhrase.thai} bind:showAnswer />
+			<QuestionCard
+				japanese={currentPhrase.japanese}
+				english={currentPhrase.english}
+				thai={currentPhrase.thai}
+				bind:showAnswer
+			/>
 			<Input {isCorrect} bind:userInput handleInput={checkInput} />
 			{#if isCorrect}
 				<Button variant="button" color="success" onclick={advance}>次へ進む</Button>
