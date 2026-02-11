@@ -1,23 +1,25 @@
-interface Word {
+type Word = {
 	fieldId: string;
 	thai: string;
 	meaning: string;
-}
+};
 
-export interface Phrase {
+export type Phrase = {
 	fieldId: string;
 	thai: string;
 	japanese: string;
+} & Partial<{
+	english: string;
 	words: Word[];
-}
+}>;
 
-export interface Situation {
+export type Situation = {
 	id: string;
 	title: string;
 	phrases: Phrase[];
-}
+};
 
-export interface LessonResult {
+export type LessonResult = {
 	phrase: Phrase;
 	correct: boolean;
-}
+};

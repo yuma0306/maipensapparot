@@ -4,21 +4,30 @@
 	import Stack from '../Stack/Stack.svelte';
 	import Typography from '../Typography/Typography.svelte';
 	import VoiceButton from '../VoiceButton/VoiceButton.svelte';
+	import type { Phrase } from '$lib/types';
 
 	type Props = {
-		japanese: string;
-		thai: string;
+		japanese: Phrase['japanese'];
+		thai: Phrase['thai'];
+		english: Phrase['english'];
 		showAnswer: boolean;
 	};
 
-	let { japanese, thai, showAnswer = $bindable() }: Props = $props();
+	let { japanese, english, thai, showAnswer = $bindable() }: Props = $props();
 </script>
 
 <Card variant="div" borderColor="gray" hasBorderLeft={false}>
 	<Stack size={2} variant="div">
-		<Typography size={4} variant="p" color="primary" weight="bold" align="center">
-			{japanese}
-		</Typography>
+		<Stack size={1} variant="div">
+			<Typography size={2} variant="p" color="dark" weight="normal" align="center">
+				{japanese}
+			</Typography>
+			{#if english}
+				<Typography size={2} variant="p" color="dark" weight="normal" align="center">
+					{english}
+				</Typography>
+			{/if}
+		</Stack>
 		<FlexColumn gap={1} variant="div" alignItems="stretch" justifyContent="center">
 			<VoiceButton text={thai} />
 			<button onclick={() => (showAnswer = !showAnswer)} class="button" aria-label="回答を見る">
@@ -26,7 +35,7 @@
 			</button>
 		</FlexColumn>
 		{#if showAnswer}
-			<Typography size={3} variant="p" color="gray" weight="normal" align="center">
+			<Typography size={3} variant="p" color="primary" weight="bold" align="center">
 				{thai}
 			</Typography>
 		{/if}
@@ -38,11 +47,6 @@
 		background: var(--color-primary-10);
 		border: 1px solid var(--color-primary);
 		color: var(--color-primary);
-		transition: opacity var(--transition);
-		font-weight: 700;
-		&:hover {
-			opacity: var(--opacity);
-		}
 	}
 	@media (min-width: 640px) {
 		.button {

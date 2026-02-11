@@ -25,11 +25,7 @@
 		place-content: center;
 		background-color: var(--color-primary-10);
 		border: 1px solid var(--color-primary);
-		transition: opacity var(--transition);
 		line-height: 1;
-		&:hover {
-			opacity: var(--opacity);
-		}
 	}
 	@media (min-width: 640px) {
 		.button {
