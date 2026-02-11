@@ -4,6 +4,8 @@
 	import type { Component } from 'svelte';
 	import EatingIcon from '$lib/components/Icon/EatingIcon.svelte';
 	import KrakenIcon from '$lib/components/Icon/KrakenIcon.svelte';
+	import ShoppingIcon from '$lib/components/Icon/ShoppingIcon.svelte';
+	import OccultIcon from '$lib/components/Icon/OccultIcon.svelte';
 
 	type Props = {
 		id: Situation['id'];
@@ -13,7 +15,9 @@
 	let { id, title, ...restProps }: Props = $props();
 
 	const iconMap: Record<string, Component> = {
-		eating: EatingIcon
+		eating: EatingIcon,
+		shopping: ShoppingIcon,
+		occult: OccultIcon
 	};
 
 	const Icon = $derived(iconMap[id] ?? KrakenIcon);
@@ -51,7 +55,7 @@
 			padding: calc(var(--spacing-2) * 1px);
 		}
 		.card__title {
-			font-size: calc(var(--font-size-3) * 1px);
+			font-size: calc(var(--font-size-2) * 1px);
 		}
 	}
 	@media (max-width: 639px) {
@@ -61,7 +65,7 @@
 			padding: calc(var(--calc-sp) * var(--spacing-2));
 		}
 		.card__title {
-			font-size: calc(var(--calc-sp) * var(--font-size-3));
+			font-size: calc(var(--calc-sp) * var(--font-size-1));
 		}
 	}
 </style>

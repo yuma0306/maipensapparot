@@ -33,14 +33,14 @@
 	}
 	@media (min-width: 640px) {
 		.icon {
-			width: calc(var(--spacing-5) * 1px);
-			height: calc(var(--spacing-5) * 1px);
+			width: calc(var(--spacing-4) * 1px);
+			height: calc(var(--spacing-4) * 1px);
 		}
 	}
 	@media (max-width: 639px) {
 		.icon {
-			width: calc(var(--calc-sp) * var(--spacing-5));
-			height: calc(var(--calc-sp) * var(--spacing-5));
+			width: calc(var(--calc-sp) * var(--spacing-4));
+			height: calc(var(--calc-sp) * var(--spacing-4));
 		}
 	}
 </style>
