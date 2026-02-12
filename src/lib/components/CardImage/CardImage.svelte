@@ -38,6 +38,15 @@
 		background-color: var(--color-white);
 		border: 1px solid var(--color-gray);
 		overflow: hidden;
+		transition: opacity var(--transition);
+		@media (hover: hover) {
+			&:hover {
+				opacity: var(--opacity);
+			}
+		}
+		&:active {
+			opacity: var(--opacity);
+		}
 	}
 	.card__title {
 		color: var(--color-secondary);

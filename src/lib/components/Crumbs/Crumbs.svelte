@@ -81,6 +81,15 @@
 	.crumbs__link {
 		text-decoration: underline;
 		color: var(--color-primary);
+		transition: opacity var(--transition);
+		@media (hover: hover) {
+			&:hover {
+				opacity: var(--opacity);
+			}
+		}
+		&:active {
+			opacity: var(--opacity);
+		}
 	}
 	@media (min-width: 640px) {
 		.crumbs__link {

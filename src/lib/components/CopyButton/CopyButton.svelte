@@ -1,22 +1,31 @@
 <script lang="ts">
 	import type { Phrase } from '$lib/types';
-	import SoundIcon from '../Icon/SoundIcon.svelte';
+	import CopyIcon from '../Icon/CopyIcon.svelte';
 
 	type Props = {
 		text: Phrase['thai'];
 	};
 
 	let { text }: Props = $props();
+	let copied = $state(false);
 
-	function speak(text: string) {
-		const utterance = new SpeechSynthesisUtterance(text);
-		utterance.lang = 'th-TH';
-		speechSynthesis.speak(utterance);
+	async function copyToClipboard(text: string) {
+		try {
+			await navigator.clipboard.writeText(text);
+			copied = true;
+			setTimeout(() => (copied = false), 2000);
+		} catch (err) {
+			console.error('Failed to copy:', err);
+		}
 	}
 </script>
 
-<button onclick={() => speak(text)} class="button">
-	<SoundIcon />
+<button
+	onclick={() => copyToClipboard(text)}
+	class="button"
+	title={copied ? 'コピーしました！' : 'コピー'}
+>
+	<CopyIcon />
 </button>
 
 <style>
@@ -26,6 +35,7 @@
 		background-color: var(--color-primary-10);
 		border: 1px solid var(--color-primary);
 		line-height: 1;
+		transition: opacity var(--transition);
 		@media (hover: hover) {
 			&:hover {
 				opacity: var(--opacity);

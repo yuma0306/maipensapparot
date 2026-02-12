@@ -5,6 +5,7 @@
 	import Stack from '../Stack/Stack.svelte';
 	import Typography from '../Typography/Typography.svelte';
 	import VoiceButton from '../VoiceButton/VoiceButton.svelte';
+	import CopyButton from '../CopyButton/CopyButton.svelte';
 
 	type CardProps = {
 		phrase: Phrase;
@@ -20,6 +21,7 @@
 				{phrase.thai}
 			</Typography>
 			<VoiceButton text={phrase.thai} />
+			<CopyButton text={phrase.thai} />
 		</FlexColumn>
 		<Typography size={2} variant="dd" color="dark" weight="normal" align="left">
 			{phrase.japanese}
@@ -49,6 +51,7 @@
 								{word.meaning}
 							</Typography>
 							<VoiceButton text={word.thai} />
+							<CopyButton text={phrase.thai} />
 						</FlexColumn>
 					</ListItem>
 				{/each}
@@ -66,18 +69,20 @@
 	}
 	@media (min-width: 640px) {
 		.card {
-			grid-template-columns: 1fr 1fr;
 			row-gap: calc(var(--spacing-4) * 1px);
 			column-gap: calc(var(--spacing-4) * 1px);
-			&[data-has-words='true']&::before {
-				content: '';
-				position: absolute;
-				top: 50%;
-				left: calc(50% - calc(var(--spacing-2) * 1px));
-				width: 1px;
-				height: 100%;
-				background-color: var(--color-gray);
-				translate: 0 -50%;
+			&[data-has-words='true'] {
+				grid-template-columns: 1fr 1fr;
+				&::before {
+					content: '';
+					position: absolute;
+					top: 50%;
+					left: calc(50% - calc(var(--spacing-2) * 1px));
+					width: 1px;
+					height: 100%;
+					background-color: var(--color-gray);
+					translate: 0 -50%;
+				}
 			}
 		}
 	}

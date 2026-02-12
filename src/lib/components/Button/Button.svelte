@@ -28,7 +28,12 @@
 		transition: opacity var(--transition);
 		margin-inline: auto;
 		cursor: pointer;
-		&:hover {
+		@media (hover: hover) {
+			&:hover {
+				opacity: var(--opacity);
+			}
+		}
+		&:active {
 			opacity: var(--opacity);
 		}
 		&[data-color='secondary'] {
