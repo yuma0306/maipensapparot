@@ -31,10 +31,10 @@
 		{/if}
 	</Stack>
 	{#if phrase.words && phrase.words.length > 0}
-	<div class="footer">
-		<Stack size={2} variant="ul">
-			{#each phrase.words as word}
-				<ListItem symbol="none">
+		<div class="footer">
+			<Stack size={2} variant="ul">
+				{#each phrase.words as word}
+					<ListItem symbol="none">
 						<FlexColumn
 							gap={1}
 							variant="div"
@@ -42,18 +42,18 @@
 							justifyContent="start"
 							isWrap={true}
 						>
-						<Typography size={2} variant="span" color="primary" weight="bold" align="left">
-							{word.thai}
-						</Typography>
-						<Typography size={2} variant="span" color="dark" weight="normal" align="left">
-							{word.meaning}
-						</Typography>
-						<VoiceButton text={word.thai} />
-					</FlexColumn>
-				</ListItem>
-			{/each}
-		</Stack>
-	</div>
+							<Typography size={2} variant="span" color="primary" weight="bold" align="left">
+								{word.thai}
+							</Typography>
+							<Typography size={2} variant="span" color="dark" weight="normal" align="left">
+								{word.meaning}
+							</Typography>
+							<VoiceButton text={word.thai} />
+						</FlexColumn>
+					</ListItem>
+				{/each}
+			</Stack>
+		</div>
 	{/if}
 </div>
 
@@ -61,7 +61,7 @@
 	.card {
 		position: relative;
 		display: grid;
-		align-items: center;
+		align-items: start;
 		background-color: var(--color-white);
 	}
 	@media (min-width: 640px) {
@@ -69,7 +69,7 @@
 			grid-template-columns: 1fr 1fr;
 			row-gap: calc(var(--spacing-4) * 1px);
 			column-gap: calc(var(--spacing-4) * 1px);
-			&::before {
+			&[data-has-words='true']&::before {
 				content: '';
 				position: absolute;
 				top: 50%;
@@ -88,9 +88,11 @@
 			column-gap: calc(var(--spacing-4) * var(--calc-sp));
 		}
 	}
+	.footer {
+		position: relative;
+	}
 	@media (max-width: 639px) {
 		.footer {
-			position: relative;
 			&::before {
 				content: '';
 				position: absolute;
@@ -101,8 +103,5 @@
 				background-color: var(--color-gray);
 			}
 		}
-	}
-	.footer {
-		position: relative;
 	}
 </style>
