@@ -51,7 +51,7 @@
 								{word.meaning}
 							</Typography>
 							<VoiceButton text={word.thai} />
-							<CopyButton text={phrase.thai} />
+							<CopyButton text={word.thai} />
 						</FlexColumn>
 					</ListItem>
 				{/each}
@@ -88,9 +88,10 @@
 	}
 	@media (max-width: 639px) {
 		.card {
-			grid-template-rows: auto 1fr;
-			row-gap: calc(var(--spacing-4) * var(--calc-sp));
-			column-gap: calc(var(--spacing-4) * var(--calc-sp));
+			&[data-has-words='true'] {
+				gap: calc(var(--spacing-4) * var(--calc-sp));
+				grid-template-rows: auto 1fr;
+			}
 		}
 	}
 	.footer {

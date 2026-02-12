@@ -6,7 +6,6 @@
 	import CardImage from '$lib/components/CardImage/CardImage.svelte';
 	import Typography from '$lib/components/Typography/Typography.svelte';
 	import { paths } from '$lib/constants/paths';
-	import Break from '$lib/components/Break/Break.svelte';
 	import Inner from '$lib/components/Inner/Inner.svelte';
 
 	let { data }: { data: PageData } = $props();
@@ -16,7 +15,7 @@
 <Inner>
 	<Stack size={3} variant="section">
 		<Typography size={5} variant="h1" color="secondary" weight="bold" align="center">
-			🍍{siteData.siteName}へ<Break media="onlySp" />ようこそ
+			🍍สวัสดีครับ🍍
 		</Typography>
 		<Typography size={2} variant="p" color="dark" weight="normal" align="center">
 			シチュエーションを選んで学習を始めましょう
