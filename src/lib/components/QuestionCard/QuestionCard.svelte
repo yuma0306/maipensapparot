@@ -5,6 +5,7 @@
 	import Typography from '../Typography/Typography.svelte';
 	import VoiceButton from '../VoiceButton/VoiceButton.svelte';
 	import type { Phrase } from '$lib/types';
+	import CopyButton from '../CopyButton/CopyButton.svelte';
 
 	type Props = {
 		japanese: Phrase['japanese'];
@@ -35,9 +36,12 @@
 			</button>
 		</FlexColumn>
 		{#if showAnswer}
-			<Typography size={3} variant="p" color="primary" weight="bold" align="center">
-				{thai}
-			</Typography>
+			<FlexColumn gap={1} variant="div" alignItems="center" justifyContent="center">
+				<Typography size={3} variant="p" color="primary" weight="bold" align="left">
+					{thai}
+				</Typography>
+				<CopyButton text={thai} />
+			</FlexColumn>
 		{/if}
 	</Stack>
 </Card>
