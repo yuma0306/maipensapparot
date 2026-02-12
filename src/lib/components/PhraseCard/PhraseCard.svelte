@@ -13,7 +13,7 @@
 	let { phrase }: CardProps = $props();
 </script>
 
-<div class="card">
+<div class="card" data-has-words={phrase.words && phrase.words.length > 0}>
 	<Stack size={1} variant="dl">
 		<FlexColumn gap={1} variant="dt" alignItems="center" justifyContent="start">
 			<Typography size={4} variant="p" color="primary" weight="bold" align="left">
@@ -30,11 +30,18 @@
 			</Typography>
 		{/if}
 	</Stack>
+	{#if phrase.words && phrase.words.length > 0}
 	<div class="footer">
 		<Stack size={2} variant="ul">
 			{#each phrase.words as word}
 				<ListItem symbol="none">
-					<FlexColumn gap={1} variant="div" alignItems="center" justifyContent="start">
+						<FlexColumn
+							gap={1}
+							variant="div"
+							alignItems="center"
+							justifyContent="start"
+							isWrap={true}
+						>
 						<Typography size={2} variant="span" color="primary" weight="bold" align="left">
 							{word.thai}
 						</Typography>
@@ -47,6 +54,7 @@
 			{/each}
 		</Stack>
 	</div>
+	{/if}
 </div>
 
 <style>
