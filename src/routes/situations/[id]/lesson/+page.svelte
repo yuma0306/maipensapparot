@@ -13,6 +13,7 @@
 	import Input from '$lib/components/Input/Input.svelte';
 	import PhraseCard from '$lib/components/PhraseCard/PhraseCard.svelte';
 	import Card from '$lib/components/Card/Card.svelte';
+	import Crumbs from '$lib/components/Crumbs/Crumbs.svelte';
 
 	let props: PageProps = $props();
 	const situation = $derived(props.data.situation);
@@ -49,6 +50,12 @@
 	}
 </script>
 
+<Crumbs
+	items={[
+		{ text: situation.title, href: paths.situation(situation.id) },
+		{ text: 'レッスン', href: paths.lesson(situation.id) }
+	]}
+/>
 {#if !isFinished}
 	<Inner>
 		<Stack size={3} variant="section">

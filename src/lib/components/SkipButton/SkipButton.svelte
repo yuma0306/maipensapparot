@@ -15,6 +15,15 @@
 		color: var(--color-white);
 		font-weight: 700;
 		cursor: pointer;
+		transition: opacity var(--transition);
+		@media (hover: hover) {
+			&:hover {
+				opacity: var(--opacity);
+			}
+		}
+		&:active {
+			opacity: var(--opacity);
+		}
 	}
 	@media (min-width: 640px) {
 		.skip {
