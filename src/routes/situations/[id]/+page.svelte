@@ -7,12 +7,14 @@
 	import PhraseCard from '$lib/components/PhraseCard/PhraseCard.svelte';
 	import Card from '$lib/components/Card/Card.svelte';
 	import Inner from '$lib/components/Inner/Inner.svelte';
+	import Crumbs from '$lib/components/Crumbs/Crumbs.svelte';
 
 	let { data }: { data: PageData } = $props();
 	const situation = $derived(data.situation);
 </script>
 
 <Inner>
+	<Crumbs items={[{ text: situation.title, href: paths.situation(situation.id) }]} />
 	<Stack size={3} variant="section">
 		<Typography size={5} variant="h1" color="secondary" weight="bold" align="center">
 			{situation.title}
