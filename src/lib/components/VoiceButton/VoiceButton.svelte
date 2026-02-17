@@ -7,15 +7,31 @@
 	};
 
 	let { text }: Props = $props();
+	let isSpeaking = $state(false);
 
 	function speak(text: string) {
+		if (isSpeaking) return;
+		isSpeaking = true;
 		const utterance = new SpeechSynthesisUtterance(text);
 		utterance.lang = 'th-TH';
+		utterance.onend = () => {
+			isSpeaking = false;
+		};
+		utterance.onerror = () => {
+			isSpeaking = false;
+		};
 		speechSynthesis.speak(utterance);
 	}
+
+	$effect(() => {
+		const interval = setInterval(() => {
+			isSpeaking = speechSynthesis.speaking;
+		}, 100);
+		return () => clearInterval(interval);
+	});
 </script>
 
-<button onclick={() => speak(text)} class="button">
+<button onclick={() => speak(text)} class="button" disabled={isSpeaking}>
 	<SoundIcon />
 </button>
 
@@ -33,6 +49,10 @@
 		}
 		&:active {
 			opacity: var(--opacity);
+		}
+		&:disabled {
+			opacity: var(--opacity);
+			cursor: not-allowed;
 		}
 	}
 	@media (min-width: 640px) {
