@@ -50,8 +50,16 @@
 							<Typography size={2} variant="span" color="dark" weight="normal" align="left">
 								{word.meaning}
 							</Typography>
-							<VoiceButton text={word.thai} />
-							<CopyButton text={word.thai} />
+							<FlexColumn
+								gap={1}
+								variant="div"
+								alignItems="center"
+								justifyContent="start"
+								isWrap={true}
+							>
+								<VoiceButton text={word.thai} />
+								<CopyButton text={word.thai} />
+							</FlexColumn>
 						</FlexColumn>
 					</ListItem>
 				{/each}

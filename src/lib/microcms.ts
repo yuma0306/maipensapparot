@@ -9,7 +9,11 @@ const client = createClient({
 
 export async function getSituations(): Promise<Situation[]> {
 	const response = await client.getList<Situation>({
-		endpoint: 'situations'
+		endpoint: 'situations',
+		queries: {
+			limit: 100,
+			fields: 'id,title'
+		}
 	});
 	return response.contents;
 }

@@ -50,14 +50,14 @@
 	}
 </script>
 
-<Crumbs
-	items={[
-		{ text: situation.title, href: paths.situation(situation.id) },
-		{ text: 'レッスン', href: paths.lesson(situation.id) }
-	]}
-/>
-{#if !isFinished}
-	<Inner>
+<Inner>
+	<Crumbs
+		items={[
+			{ text: situation.title, href: paths.situation(situation.id) },
+			{ text: 'レッスン', href: paths.lesson(situation.id) }
+		]}
+	/>
+	{#if !isFinished}
 		<Stack size={3} variant="section">
 			<Stack size={1} variant="div">
 				<Typography size={2} variant="p" color="dark" weight="bold" align="center">
@@ -76,12 +76,10 @@
 				<Button variant="button" color="success" onclick={advance}>次へ進む</Button>
 			{/if}
 		</Stack>
-	</Inner>
-	{#if !isCorrect}
-		<SkipButton onclick={skipPhrase} />
-	{/if}
-{:else}
-	<Inner>
+		{#if !isCorrect}
+			<SkipButton onclick={skipPhrase} />
+		{/if}
+	{:else}
 		<Stack size={3} variant="section">
 			<Typography size={5} variant="h1" color="secondary" weight="bold" align="center">
 				結果
@@ -100,5 +98,5 @@
 			</Stack>
 			<Button variant="a" color="secondary" href={paths.situation(situation.id)}>戻る</Button>
 		</Stack>
-	</Inner>
-{/if}
+	{/if}
+</Inner>
