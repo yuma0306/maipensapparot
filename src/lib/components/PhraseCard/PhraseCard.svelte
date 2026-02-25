@@ -85,7 +85,7 @@
 					content: '';
 					position: absolute;
 					top: 50%;
-					left: calc(50% - calc(var(--spacing-2) * 1px));
+					left: 50%;
 					width: 1px;
 					height: 100%;
 					background-color: var(--color-gray);
