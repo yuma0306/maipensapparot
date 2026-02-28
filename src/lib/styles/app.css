@@ -4,6 +4,7 @@
 	--color-black: #000;
 	--color-white: #fff;
 	--color-gray: #c5c5c5;
+	--color-gray-10: color-mix(in srgb, var(--color-gray) 10%, var(--color-white));
 	--color-primary: #2d2a4a;
 	--color-primary-10: color-mix(in srgb, var(--color-primary) 10%, var(--color-white));
 	--color-secondary: #a51931;
