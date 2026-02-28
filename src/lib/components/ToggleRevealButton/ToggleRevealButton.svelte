@@ -1,19 +1,13 @@
 <script lang="ts">
 	type Props = {
 		expanded?: boolean;
-		showLabel?: string;
-		hideLabel?: string;
-		ariaLabel?: string;
+		showLabel: string;
+		hideLabel: string;
+		ariaLabel: string;
 		onclick?: (e: MouseEvent) => void;
 	};
 
-	let {
-		expanded = false,
-		showLabel = '👀 訳を見る',
-		hideLabel = '🙈 訳を隠す',
-		ariaLabel = '訳を見る',
-		onclick
-	}: Props = $props();
+	let { expanded = false, showLabel, hideLabel, ariaLabel, onclick }: Props = $props();
 </script>
 
 <button type="button" class="toggle-reveal-button" {onclick} aria-label={ariaLabel}>

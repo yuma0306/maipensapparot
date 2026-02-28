@@ -40,7 +40,13 @@
 					<VoiceButton text={question.title} />
 					<CopyButton text={question.title} />
 				{/if}
-				<ToggleRevealButton expanded={showQuestionMeaning} onclick={toggleQuestionMeaning} />
+				<ToggleRevealButton
+					expanded={showQuestionMeaning}
+					showLabel="👀 訳を見る"
+					hideLabel="🙈 訳を隠す"
+					ariaLabel="訳を見る"
+					onclick={toggleQuestionMeaning}
+				/>
 			</FlexColumn>
 			{#if showQuestionMeaning}
 				<Typography size={2} variant="p" color="dark" weight="normal" align="center">
@@ -77,6 +83,9 @@
 								{/if}
 								<ToggleRevealButton
 									expanded={showOptionMeaning[i]}
+									showLabel="👀 訳を見る"
+									hideLabel="🙈 訳を隠す"
+									ariaLabel="訳を見る"
 									onclick={(e) => {
 										e.stopPropagation();
 										toggleOptionMeaning(i);
