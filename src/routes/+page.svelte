@@ -13,30 +13,32 @@
 </script>
 
 <Inner>
-	<Stack size={3} variant="section">
-		<Typography size={5} variant="h1" color="secondary" weight="bold" align="center">
-			🍍สวัสดีครับ🍍
-		</Typography>
-		<Typography size={2} variant="p" color="dark" weight="normal" align="center">
-			シチュエーションを選んで学習を始めましょう
-		</Typography>
-		<CardImageList>
-			{#each situations as situation}
-				<CardImage id={situation.id} href={paths.situation(situation.id)} title={situation.title} />
-			{/each}
-		</CardImageList>
-	</Stack>
-	<Stack size={3} variant="section">
-		<Typography size={4} variant="h2" color="secondary" weight="bold" align="center">
-			試験
-		</Typography>
-		<Typography size={2} variant="p" color="dark" weight="normal" align="center">
-			試験を選んで学習を始めましょう
-		</Typography>
-		<CardImageList>
-			{#each exams as exam}
-				<CardImage id={exam.id} href={paths.exam(exam.id)} title={exam.title} />
-			{/each}
-		</CardImageList>
+	<Stack size={3} variant="div">
+		<Stack size={2} variant="section">
+			<Typography size={4} variant="h2" color="secondary" weight="bold" align="center">
+				会話フレーズ
+			</Typography>
+			<CardImageList>
+				{#each situations as situation}
+					<CardImage
+						id={situation.id}
+						href={paths.situation(situation.id)}
+						title={situation.title}
+					/>
+				{/each}
+			</CardImageList>
+		</Stack>
+		<Stack size={2} variant="section">
+			<Typography size={4} variant="h2" color="secondary" weight="bold" align="center">
+				試験
+			</Typography>
+			<CardImageList>
+				{#each exams as exam}
+					{#if exam.title}
+						<CardImage id={exam.id} href={paths.exam(exam.id)} title={exam.title} />
+					{/if}
+				{/each}
+			</CardImageList>
+		</Stack>
 	</Stack>
 </Inner>

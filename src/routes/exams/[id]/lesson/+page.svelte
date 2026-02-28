@@ -17,21 +17,24 @@
 	let props: PageProps = $props();
 	const exam = $derived(props.data.exam);
 	const questions = $derived(exam.questions);
-	const total = $derived(questions.length);
+	const total = $derived(questions?.length ?? 0);
 
 	let currentIndex = $state(0);
 	let results: ExamResult[] = $state([]);
 	let selectedOptionIndex = $state<number | undefined>(undefined);
 
-	const currentQuestion = $derived(questions[currentIndex]);
+	const currentQuestion = $derived(questions?.[currentIndex]);
 	const isFinished = $derived(currentIndex >= total);
 	const correctCount = $derived(results.filter((r) => r.correct).length);
 
 	function selectOption(optionIndex: number) {
 		if (selectedOptionIndex !== undefined) return;
 		selectedOptionIndex = optionIndex;
-		const correct = currentQuestion.options[optionIndex].isCorrect;
-		results = [...results, { question: currentQuestion, selectedOptionIndex: optionIndex, correct }];
+		const correct = currentQuestion?.options?.[optionIndex]?.isCorrect ?? false;
+		results = [
+			...results,
+			{ question: currentQuestion, selectedOptionIndex: optionIndex, correct }
+		];
 	}
 
 	function skipQuestion() {
@@ -47,12 +50,14 @@
 </script>
 
 <Inner>
-	<Crumbs
-		items={[
-			{ text: exam.title, href: paths.exam(exam.id) },
-			{ text: '試験', href: paths.examLesson(exam.id) }
-		]}
-	/>
+	{#if exam.title}
+		<Crumbs
+			items={[
+				{ text: exam.title, href: paths.exam(exam.id) },
+				{ text: '試験', href: paths.examLesson(exam.id) }
+			]}
+		/>
+	{/if}
 	{#if !isFinished}
 		<Stack size={3} variant="section">
 			<Stack size={1} variant="div">
@@ -62,19 +67,21 @@
 				<Progress value={currentIndex} max={total} />
 			</Stack>
 			{#key currentIndex}
-				<ExamQuizCard
-					question={currentQuestion}
-					onSelect={selectOption}
-					selectedIndex={selectedOptionIndex}
-				/>
+				{#if currentQuestion}
+					<ExamQuizCard
+						question={currentQuestion}
+						onSelect={selectOption}
+						selectedIndex={selectedOptionIndex}
+					/>
+				{/if}
 			{/key}
 			{#if selectedOptionIndex !== undefined}
 				<Button variant="button" color="success" onclick={advance}>次へ進む</Button>
 			{/if}
+			{#if selectedOptionIndex === undefined}
+				<SkipButton onclick={skipQuestion} />
+			{/if}
 		</Stack>
-		{#if selectedOptionIndex === undefined}
-			<SkipButton onclick={skipQuestion} />
-		{/if}
 	{:else}
 		<Stack size={3} variant="section">
 			<Typography size={5} variant="h1" color="secondary" weight="bold" align="center">
@@ -83,13 +90,15 @@
 			<ScoreCard score={correctCount} {total} />
 			<Stack size={2} variant="ul">
 				{#each results as result}
-					<Card
-						variant="li"
-						borderColor={result.correct ? 'success' : 'warning'}
-						hasBorderLeft={true}
-					>
-						<ExamQuestionCard question={result.question} />
-					</Card>
+					{#if result.question}
+						<Card
+							variant="li"
+							borderColor={result.correct ? 'success' : 'warning'}
+							hasBorderLeft={true}
+						>
+							<ExamQuestionCard question={result.question} />
+						</Card>
+					{/if}
 				{/each}
 			</Stack>
 			<Button variant="a" color="secondary" href={paths.exam(exam.id)}>戻る</Button>

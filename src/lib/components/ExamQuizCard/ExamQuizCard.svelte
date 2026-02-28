@@ -57,50 +57,46 @@
 		<ul class="options">
 			{#each question.options as option, i}
 				<li class="option-row">
-					<div class="option-content">
-						<div class="option-main">
-							<button
-								type="button"
-								class="option-button"
-								class:correct={showResult && option.isCorrect}
-								class:incorrect={showResult && selectedIndex === i && !option.isCorrect}
-								disabled={showResult}
-								onclick={() => onSelect(i)}
-							>
-								<span class="option-number">{i + 1}.</span>
-								<span class="option-text">{option.option}</span>
-							</button>
-							<FlexColumn
-								gap={1}
-								variant="div"
-								alignItems="center"
-								justifyContent="start"
-								isWrap={true}
-							>
-								{#if option.option}
-									<VoiceButton text={option.option} />
-									<CopyButton text={option.option} />
-								{/if}
-								<ToggleRevealButton
-									expanded={showOptionMeaning[i]}
-									showLabel="👀 訳を見る"
-									hideLabel="🙈 訳を隠す"
-									ariaLabel="訳を見る"
-									onclick={(e) => {
-										e.stopPropagation();
-										toggleOptionMeaning(i);
-									}}
-								/>
-							</FlexColumn>
-						</div>
-						{#if showOptionMeaning[i]}
-							<div class="option-meaning">
-								<Typography size={2} variant="p" color="dark" weight="normal" align="left">
-									{option.meaning}
-								</Typography>
-							</div>
-						{/if}
+					<div class="option-main">
+						<button
+							type="button"
+							class="option-button"
+							class:correct={showResult && option.isCorrect}
+							class:incorrect={showResult && selectedIndex === i && !option.isCorrect}
+							disabled={showResult}
+							onclick={() => onSelect(i)}
+						>
+							<span class="option-number">{i + 1}.</span>
+							<span class="option-text">{option.option}</span>
+						</button>
 					</div>
+					<FlexColumn
+						gap={1}
+						variant="div"
+						alignItems="center"
+						justifyContent="start"
+						isWrap={true}
+					>
+						{#if option.option}
+							<VoiceButton text={option.option} />
+							<CopyButton text={option.option} />
+						{/if}
+						<ToggleRevealButton
+							expanded={showOptionMeaning[i]}
+							showLabel="👀 訳を見る"
+							hideLabel="🙈 訳を隠す"
+							ariaLabel="訳を見る"
+							onclick={(e) => {
+								e.stopPropagation();
+								toggleOptionMeaning(i);
+							}}
+						/>
+					</FlexColumn>
+					{#if showOptionMeaning[i]}
+						<Typography size={2} variant="p" color="dark" weight="normal" align="left">
+							{option.meaning}
+						</Typography>
+					{/if}
 				</li>
 			{/each}
 		</ul>
@@ -177,22 +173,6 @@
 		flex-direction: column;
 		gap: calc(var(--spacing-2) * 1px);
 	}
-	.option-content {
-		display: flex;
-		flex-wrap: wrap;
-		align-items: center;
-		gap: calc(var(--spacing-2) * 1px);
-	}
-	.option-content:has(.option-meaning) {
-		column-gap: calc(var(--spacing-2) * 1px);
-		row-gap: calc(var(--spacing-4) * 1px);
-	}
-	@media (max-width: 639px) {
-		.option-content:has(.option-meaning) {
-			column-gap: calc(var(--calc-sp) * var(--spacing-2));
-			row-gap: calc(var(--spacing-4) * var(--calc-sp));
-		}
-	}
 	.option-main {
 		display: flex;
 		flex-wrap: wrap;
@@ -205,14 +185,6 @@
 		.option-main {
 			gap: calc(var(--calc-sp) * var(--spacing-2));
 		}
-	}
-	.option-content .option-button {
-		flex: 1;
-		min-width: 0;
-	}
-	.option-meaning {
-		width: 100%;
-		flex-basis: 100%;
 	}
 	@media (max-width: 639px) {
 		.option-row {
