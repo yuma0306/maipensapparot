@@ -91,13 +91,10 @@
 			<Stack size={2} variant="ul">
 				{#each results as result}
 					{#if result.question}
-						<Card
-							variant="li"
+						<ExamQuestionCard
+							question={result.question}
 							borderColor={result.correct ? 'success' : 'warning'}
-							hasBorderLeft={true}
-						>
-							<ExamQuestionCard question={result.question} />
-						</Card>
+						/>
 					{/if}
 				{/each}
 			</Stack>
