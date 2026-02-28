@@ -1,0 +1,227 @@
+<script lang="ts">
+	import type { ExamQuestion } from '$lib/types';
+	import Card from '$lib/components/Card/Card.svelte';
+	import Stack from '$lib/components/Stack/Stack.svelte';
+	import Typography from '$lib/components/Typography/Typography.svelte';
+	import FlexColumn from '$lib/components/FlexColumn/FlexColumn.svelte';
+	import VoiceButton from '$lib/components/VoiceButton/VoiceButton.svelte';
+	import CopyButton from '$lib/components/CopyButton/CopyButton.svelte';
+
+	type Props = {
+		question: ExamQuestion;
+		onSelect: (optionIndex: number) => void;
+		selectedIndex?: number;
+	};
+
+	let { question, onSelect, selectedIndex }: Props = $props();
+
+	const showResult = $derived(selectedIndex !== undefined);
+	let showQuestionMeaning = $state(false);
+	let showOptionMeaning = $state<Record<number, boolean>>({});
+
+	function toggleQuestionMeaning() {
+		showQuestionMeaning = !showQuestionMeaning;
+	}
+
+	function toggleOptionMeaning(i: number) {
+		showOptionMeaning = { ...showOptionMeaning, [i]: !showOptionMeaning[i] };
+	}
+</script>
+
+<Card variant="div" borderColor="gray" hasBorderLeft={false}>
+	<Stack size={2} variant="div">
+		<Stack size={1} variant="div">
+			<Typography size={4} variant="p" color="primary" weight="bold" align="center">
+				{question.title}
+			</Typography>
+			<FlexColumn gap={1} variant="div" alignItems="center" justifyContent="center">
+				<VoiceButton text={question.title} />
+				<CopyButton text={question.title} />
+				<button onclick={toggleQuestionMeaning} class="translation-button" aria-label="訳を見る">
+					{showQuestionMeaning ? '🙈 訳を隠す' : '👀 訳を見る'}
+				</button>
+			</FlexColumn>
+			{#if showQuestionMeaning}
+				<Typography size={2} variant="p" color="dark" weight="normal" align="center">
+					{question.meaning}
+				</Typography>
+			{/if}
+		</Stack>
+		{#if question.image?.url}
+			<img
+				src={question.image.url}
+				alt=""
+				width={question.image.width}
+				height={question.image.height}
+				class="image"
+			/>
+		{/if}
+		<ul class="options">
+			{#each question.options as option, i}
+				<li class="option-row">
+					<div class="option-content">
+						<button
+							type="button"
+							class="option-button"
+							class:correct={showResult && option.isCorrect}
+							class:incorrect={showResult && selectedIndex === i && !option.isCorrect}
+							disabled={showResult}
+							onclick={() => onSelect(i)}
+						>
+							<span class="option-number">{i + 1}.</span>
+							<span class="option-text">{option.option}</span>
+						</button>
+						<FlexColumn gap={1} variant="div" alignItems="center" justifyContent="start" isWrap={true}>
+							<VoiceButton text={option.option} />
+							<CopyButton text={option.option} />
+							<button
+								type="button"
+								class="translation-button"
+								onclick={(e) => {
+									e.stopPropagation();
+									toggleOptionMeaning(i);
+								}}
+								aria-label="訳を見る"
+							>
+								{showOptionMeaning[i] ? '🙈 訳を隠す' : '👀 訳を見る'}
+							</button>
+						</FlexColumn>
+						{#if showOptionMeaning[i]}
+							<div class="option-meaning">
+								<Typography size={2} variant="p" color="dark" weight="normal" align="left">
+									{option.meaning}
+								</Typography>
+							</div>
+						{/if}
+					</div>
+				</li>
+			{/each}
+		</ul>
+	</Stack>
+</Card>
+
+<style>
+	.image {
+		max-width: 100%;
+		height: auto;
+		border-radius: calc(var(--border-radius) * 1px);
+	}
+	@media (max-width: 639px) {
+		.image {
+			border-radius: calc(var(--calc-sp) * var(--border-radius));
+		}
+	}
+	.options {
+		display: grid;
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		row-gap: calc(var(--spacing-2) * 1px);
+	}
+	@media (max-width: 639px) {
+		.options {
+			row-gap: calc(var(--calc-sp) * var(--spacing-2));
+		}
+	}
+	.option-button {
+		display: flex;
+		align-items: center;
+		gap: calc(var(--spacing-2) * 1px);
+		width: 100%;
+		padding: calc(var(--spacing-2) * 1px);
+		text-align: left;
+		background-color: var(--color-primary-10);
+		border: 1px solid var(--color-primary);
+		color: var(--color-primary);
+		cursor: pointer;
+		transition: opacity var(--transition);
+	}
+	.option-button:hover {
+		opacity: var(--opacity);
+	}
+	.option-button:active {
+		opacity: var(--opacity);
+	}
+	.option-button:disabled {
+		cursor: default;
+	}
+	.option-button.correct {
+		background-color: var(--color-success);
+		border-color: var(--color-success);
+		color: var(--color-white);
+	}
+	.option-button.incorrect {
+		background-color: var(--color-warning);
+		border-color: var(--color-warning);
+		color: var(--color-white);
+	}
+	@media (min-width: 640px) {
+		.option-button {
+			border-radius: calc(var(--border-radius) * 1px);
+			font-size: calc(var(--font-size-2) * 1px);
+		}
+	}
+	@media (max-width: 639px) {
+		.option-button {
+			border-radius: calc(var(--calc-sp) * var(--border-radius));
+			padding: calc(var(--calc-sp) * var(--spacing-2));
+			font-size: calc(var(--calc-sp) * var(--font-size-2));
+		}
+	}
+	.option-number {
+		flex-shrink: 0;
+		font-weight: bold;
+	}
+	.option-text {
+		flex: 1;
+	}
+	.option-row {
+		display: flex;
+		flex-direction: column;
+		gap: calc(var(--spacing-2) * 1px);
+	}
+	.option-content {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: calc(var(--spacing-2) * 1px);
+	}
+	.option-content .option-button {
+		flex: 1;
+		min-width: 0;
+	}
+	.option-meaning {
+		width: 100%;
+		flex-basis: 100%;
+	}
+	.translation-button {
+		background: var(--color-primary-10);
+		border: 1px solid var(--color-primary);
+		color: var(--color-primary);
+		transition: opacity var(--transition);
+		cursor: pointer;
+	}
+	.translation-button:hover {
+		opacity: var(--opacity);
+	}
+	.translation-button:active {
+		opacity: var(--opacity);
+	}
+	@media (min-width: 640px) {
+		.translation-button {
+			border-radius: calc(var(--border-radius) * 1px);
+			padding: calc(var(--spacing-1) * 1px);
+			font-size: calc(var(--font-size-2) * 1px);
+		}
+	}
+	@media (max-width: 639px) {
+		.option-row {
+			gap: calc(var(--calc-sp) * var(--spacing-2));
+		}
+		.translation-button {
+			border-radius: calc(var(--calc-sp) * var(--border-radius));
+			padding: calc(var(--calc-sp) * var(--spacing-1));
+			font-size: calc(var(--calc-sp) * var(--font-size-2));
+		}
+	}
+</style>
