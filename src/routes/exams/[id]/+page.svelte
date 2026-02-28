@@ -13,14 +13,14 @@
 </script>
 
 <Inner>
-	<Crumbs items={[{ text: exam.title, href: paths.exam(exam.id) }]} />
+	{#if exam.title}
+		<Crumbs items={[{ text: exam.title, href: paths.exam(exam.id) }]} />
+	{/if}
 	<Stack size={3} variant="section">
 		<Typography size={5} variant="h1" color="secondary" weight="bold" align="center">
 			{exam.title}
 		</Typography>
-		<Button color="secondary" variant="a" href={paths.examLesson(exam.id)}>
-			試験をスタート
-		</Button>
+		<Button color="secondary" variant="a" href={paths.examLesson(exam.id)}>試験をスタート</Button>
 		<Stack size={2} variant="ul">
 			{#each exam.questions as question}
 				<ExamQuestionCard {question} />

@@ -26,35 +26,38 @@ export type LessonResult = {
 
 export type ExamWord = {
 	fieldId: string;
+} & Partial<{
 	word: string;
 	meaning: string;
-};
+}>;
 
 type ExamOption = {
 	fieldId: string;
+} & Partial<{
 	option: string;
 	meaning: string;
 	isCorrect: boolean;
-	words?: ExamWord[];
-};
+	words: ExamWord[];
+}>;
 
 export type ExamQuestion = {
 	fieldId: string;
+} & Partial<{
 	title: string;
 	meaning: string;
-	image?: { url: string; height: number; width: number };
-	words?: ExamWord[];
+	words: ExamWord[];
 	options: ExamOption[];
-};
+}>;
 
 export type Exam = {
 	id: string;
+} & Partial<{
 	title: string;
 	questions: ExamQuestion[];
-};
+}>;
 
-export type ExamResult = {
+export type ExamResult = Partial<{
 	question: ExamQuestion;
 	selectedOptionIndex: number;
 	correct: boolean;
-};
+}>;

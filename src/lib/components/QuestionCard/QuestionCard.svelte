@@ -6,6 +6,7 @@
 	import VoiceButton from '../VoiceButton/VoiceButton.svelte';
 	import type { Phrase } from '$lib/types';
 	import CopyButton from '../CopyButton/CopyButton.svelte';
+	import ToggleRevealButton from '../ToggleRevealButton/ToggleRevealButton.svelte';
 
 	type Props = {
 		japanese: Phrase['japanese'];
@@ -31,9 +32,13 @@
 		</Stack>
 		<FlexColumn gap={1} variant="div" alignItems="stretch" justifyContent="center">
 			<VoiceButton text={thai} />
-			<button onclick={() => (showAnswer = !showAnswer)} class="button" aria-label="回答を見る">
-				{showAnswer ? '🙈 回答を隠す' : '👀 回答を見る'}
-			</button>
+			<ToggleRevealButton
+				expanded={showAnswer}
+				showLabel="👀 回答を見る"
+				hideLabel="🙈 回答を隠す"
+				ariaLabel="回答を見る"
+				onclick={() => (showAnswer = !showAnswer)}
+			/>
 		</FlexColumn>
 		{#if showAnswer}
 			<FlexColumn gap={1} variant="div" alignItems="center" justifyContent="center">
@@ -45,35 +50,3 @@
 		{/if}
 	</Stack>
 </Card>
-
-<style>
-	.button {
-		background: var(--color-primary-10);
-		border: 1px solid var(--color-primary);
-		color: var(--color-primary);
-		transition: opacity var(--transition);
-		@media (hover: hover) {
-			&:hover {
-				opacity: var(--opacity);
-			}
-		}
-		&:active {
-			opacity: var(--opacity);
-		}
-	}
-	@media (min-width: 640px) {
-		.button {
-			border-radius: calc(var(--border-radius) * 1px);
-			padding: calc(var(--spacing-1) * 1px);
-			font-size: calc(var(--font-size-2) * 1px);
-			cursor: pointer;
-		}
-	}
-	@media (max-width: 639px) {
-		.button {
-			border-radius: calc(var(--calc-sp) * var(--border-radius));
-			padding: calc(var(--calc-sp) * var(--spacing-1));
-			font-size: calc(var(--calc-sp) * var(--font-size-2));
-		}
-	}
-</style>
