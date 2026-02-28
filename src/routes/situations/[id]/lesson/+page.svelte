@@ -75,10 +75,10 @@
 			{#if isCorrect}
 				<Button variant="button" color="success" onclick={advance}>次へ進む</Button>
 			{/if}
+			{#if !isCorrect}
+				<SkipButton onclick={skipPhrase} />
+			{/if}
 		</Stack>
-		{#if !isCorrect}
-			<SkipButton onclick={skipPhrase} />
-		{/if}
 	{:else}
 		<Stack size={3} variant="section">
 			<Typography size={5} variant="h1" color="secondary" weight="bold" align="center">

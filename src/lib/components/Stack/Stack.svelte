@@ -4,7 +4,7 @@
 
 	type CommonProps = {
 		size: 1 | 2 | 3 | 4 | 5;
-		variant: 'div' | 'ul' | 'section' | 'dl';
+		variant: 'div' | 'ul' | 'section' | 'dl' | 'li';
 		children: Snippet;
 	};
 	type Props = CommonProps & HTMLAttributes<HTMLElement>;

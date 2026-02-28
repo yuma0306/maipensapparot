@@ -4,7 +4,7 @@
 	type Props = {
 		children: Snippet;
 		gap: 1 | 2 | 3 | 4 | 5;
-		variant: 'dt' | 'div';
+		variant: 'dt' | 'div' | 'span';
 		alignItems: 'start' | 'center' | 'end' | 'stretch';
 		justifyContent: 'start' | 'center' | 'end';
 	} & Partial<{
