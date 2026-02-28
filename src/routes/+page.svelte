@@ -30,7 +30,7 @@
 		</Stack>
 		<Stack size={2} variant="section">
 			<Typography size={4} variant="h2" color="secondary" weight="bold" align="center">
-				試験
+				4択問題
 			</Typography>
 			<CardImageList>
 				{#each exams as exam}
