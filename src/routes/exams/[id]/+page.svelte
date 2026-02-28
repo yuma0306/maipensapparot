@@ -23,7 +23,7 @@
 		<Button color="secondary" variant="a" href={paths.examLesson(exam.id)}>試験をスタート</Button>
 		<Stack size={2} variant="ul">
 			{#each exam.questions as question}
-				<ExamQuestionCard {question} />
+				<ExamQuestionCard {question} borderColor="gray" />
 			{/each}
 		</Stack>
 	</Stack>
