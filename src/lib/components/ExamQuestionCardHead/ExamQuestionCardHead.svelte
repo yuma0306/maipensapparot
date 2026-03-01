@@ -57,6 +57,7 @@
 	.question-block {
 		position: relative;
 		display: grid;
+		align-items: start;
 	}
 	@media (min-width: 640px) {
 		.question-block {

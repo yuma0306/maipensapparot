@@ -97,9 +97,11 @@
 <style>
 	.option {
 		display: grid;
+		align-items: start;
 	}
 	.option-inner {
 		display: grid;
+		align-items: start;
 	}
 	@media (min-width: 640px) {
 		.option {
