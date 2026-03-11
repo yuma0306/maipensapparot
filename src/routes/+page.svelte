@@ -16,7 +16,7 @@
 	<Stack size={3} variant="div">
 		<Stack size={2} variant="section">
 			<Typography size={4} variant="h2" color="secondary" weight="bold" align="center">
-				会話フレーズ
+				フレーズ
 			</Typography>
 			<CardImageList>
 				{#each situations as situation}
