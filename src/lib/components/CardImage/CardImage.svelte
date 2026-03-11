@@ -1,11 +1,6 @@
 <script lang="ts">
 	import type { HTMLAnchorAttributes } from 'svelte/elements';
 	import type { Situation } from '$lib/types';
-	import type { Component } from 'svelte';
-	import EatingIcon from '$lib/components/Icon/EatingIcon.svelte';
-	import KrakenIcon from '$lib/components/Icon/KrakenIcon.svelte';
-	import ShoppingIcon from '$lib/components/Icon/ShoppingIcon.svelte';
-	import OccultIcon from '$lib/components/Icon/OccultIcon.svelte';
 
 	type Props = {
 		id: Situation['id'];
@@ -13,28 +8,17 @@
 	} & HTMLAnchorAttributes;
 
 	let { id, title, ...restProps }: Props = $props();
-
-	const iconMap: Record<string, Component> = {
-		eating: EatingIcon,
-		shopping: ShoppingIcon,
-		occult: OccultIcon
-	};
-
-	const Icon = $derived(iconMap[id] ?? KrakenIcon);
 </script>
 
 <a class="card" {...restProps}>
-	<Icon />
 	<p class="card__title">{title}</p>
 </a>
 
 <style>
 	.card {
-		display: grid;
-		grid-template-rows: subgrid;
-		grid-row: span 2;
-		place-content: center;
+		aspect-ratio: 3 / 2;
 		place-items: center;
+		place-content: center;
 		background-color: var(--color-white);
 		border: 1px solid var(--color-gray);
 		overflow: hidden;
@@ -49,7 +33,7 @@
 		}
 	}
 	.card__title {
-		color: var(--color-secondary);
+		color: var(--color-primary);
 		font-weight: bold;
 		display: -webkit-box;
 		-webkit-line-clamp: 2;
