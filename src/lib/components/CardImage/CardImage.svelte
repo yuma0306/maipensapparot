@@ -17,8 +17,8 @@
 <style>
 	.card {
 		aspect-ratio: 3 / 2;
-		place-items: center;
 		place-content: center;
+		text-align: center;
 		background-color: var(--color-white);
 		border: 1px solid var(--color-gray);
 		overflow: hidden;
