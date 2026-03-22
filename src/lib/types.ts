@@ -1,28 +1,51 @@
-type Word = {
-	fieldId: string;
-	thai: string;
-	meaning: string;
+type Base = {
+	id: string;
+	createdAt: string;
+	updatedAt: string;
+	publishedAt: string;
+	revisedAt: string;
 };
+
+export type Situation = Base &
+	Partial<{
+		title: string;
+		phrases: Phrase[];
+	}>;
 
 export type Phrase = {
 	fieldId: string;
-	thai: string;
-	japanese: string;
 } & Partial<{
-	english: string;
+	phrase: string;
+	meaning: string;
 	words: Word[];
 }>;
 
-export type Situation = {
-	id: string;
-	title: string;
-	phrases: Phrase[];
-};
+type Word = {
+	fieldId: string;
+} & Partial<{
+	word: string;
+	meaning: string;
+}>;
 
 export type LessonResult = {
 	phrase: Phrase;
 	correct: boolean;
 };
+
+export type Exam = Base &
+	Partial<{
+		title: string;
+		questions: ExamQuestion[];
+	}>;
+
+export type ExamQuestion = {
+	fieldId: string;
+} & Partial<{
+	title: string;
+	meaning: string;
+	words: ExamWord[];
+	options: ExamOption[];
+}>;
 
 export type ExamWord = {
 	fieldId: string;
@@ -38,22 +61,6 @@ type ExamOption = {
 	meaning: string;
 	isCorrect: boolean;
 	words: ExamWord[];
-}>;
-
-export type ExamQuestion = {
-	fieldId: string;
-} & Partial<{
-	title: string;
-	meaning: string;
-	words: ExamWord[];
-	options: ExamOption[];
-}>;
-
-export type Exam = {
-	id: string;
-} & Partial<{
-	title: string;
-	questions: ExamQuestion[];
 }>;
 
 export type ExamResult = Partial<{
