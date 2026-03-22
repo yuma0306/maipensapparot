@@ -14,20 +14,22 @@
 </script>
 
 <Inner>
-	<Crumbs items={[{ text: situation.title, href: paths.situation(situation.id) }]} />
+	<Crumbs items={[{ text: situation.title ?? '', href: paths.situation(situation.id) }]} />
 	<Stack size={3} variant="section">
 		<Typography size={5} variant="h1" color="secondary" weight="bold" align="center">
-			{situation.title}
+			{situation.title ?? ''}
 		</Typography>
 		<Button color="secondary" variant="a" href={`${paths.lesson(situation.id)}`}>
 			レッスンをスタート
 		</Button>
-		<Stack size={2} variant="ul">
-			{#each situation.phrases as phrase}
-				<Card variant="li" borderColor="gray" hasBorderLeft={true}>
-					<PhraseCard {phrase} />
-				</Card>
-			{/each}
-		</Stack>
+		{#if situation.phrases && situation.phrases.length > 0}
+			<Stack size={2} variant="ul">
+				{#each situation.phrases as phrase}
+					<Card variant="li" borderColor="gray" hasBorderLeft={true}>
+						<PhraseCard {phrase} />
+					</Card>
+				{/each}
+			</Stack>
+		{/if}
 	</Stack>
 </Inner>

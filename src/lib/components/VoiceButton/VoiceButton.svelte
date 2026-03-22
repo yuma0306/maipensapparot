@@ -3,7 +3,7 @@
 	import SoundIcon from '../Icon/SoundIcon.svelte';
 
 	type Props = {
-		text: Phrase['thai'];
+		text: Phrase['phrase'];
 	};
 
 	let { text }: Props = $props();
@@ -31,9 +31,11 @@
 	});
 </script>
 
-<button onclick={() => speak(text)} class="button" disabled={isSpeaking}>
-	<SoundIcon />
-</button>
+{#if text}
+	<button onclick={() => speak(text)} class="button" disabled={isSpeaking}>
+		<SoundIcon />
+	</button>
+{/if}
 
 <style>
 	.button {
