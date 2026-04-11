@@ -43,6 +43,7 @@ export type ExamQuestion = {
 } & Partial<{
 	title: string;
 	meaning: string;
+	ipa: string;
 	words: ExamWord[];
 	options: ExamOption[];
 }>;
@@ -58,6 +59,7 @@ type ExamOption = {
 	fieldId: string;
 } & Partial<{
 	option: string;
+	ipa: string;
 	meaning: string;
 	isCorrect: boolean;
 	words: ExamWord[];

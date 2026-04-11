@@ -25,9 +25,16 @@
 				<CopyButton text={question.title} />
 			{/if}
 		</FlexColumn>
-		<Typography size={2} variant="p" color="dark" weight="normal" align="left">
-			{question.meaning}
-		</Typography>
+		{#if question.ipa}
+			<Typography size={2} variant="p" color="dark" weight="normal" align="left">
+				{question.ipa}
+			</Typography>
+		{/if}
+		{#if question.meaning}
+			<Typography size={2} variant="p" color="dark" weight="normal" align="left">
+				{question.meaning}
+			</Typography>
+		{/if}
 	</Stack>
 	{#if question.words?.length}
 		<Stack size={1} variant="ul">

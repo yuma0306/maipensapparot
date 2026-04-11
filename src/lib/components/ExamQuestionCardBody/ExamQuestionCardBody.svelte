@@ -49,6 +49,11 @@
 							{/if}
 						</FlexColumn>
 					</FlexColumn>
+					{#if option.ipa}
+						<Typography size={2} variant="span" color="dark" weight="normal" align="left">
+							{option.ipa}
+						</Typography>
+					{/if}
 					{#if option.meaning}
 						<Typography size={2} variant="span" color="dark" weight="normal" align="left">
 							{option.meaning}
