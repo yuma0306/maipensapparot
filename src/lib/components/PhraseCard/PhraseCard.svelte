@@ -23,9 +23,16 @@
 			<VoiceButton text={phrase.phrase} />
 			<CopyButton text={phrase.phrase} />
 		</FlexColumn>
-		<Typography size={2} variant="dd" color="dark" weight="normal" align="left">
-			{phrase.meaning}
-		</Typography>
+		{#if phrase.ipa}}
+			<Typography size={2} variant="dd" color="dark" weight="normal" align="left">
+				{phrase.ipa}
+			</Typography>
+		{/if}
+		{#if phrase.meaning}}
+			<Typography size={2} variant="dd" color="dark" weight="normal" align="left">
+				{phrase.meaning}
+			</Typography>
+		{/if}
 	</Stack>
 	{#if phrase.words && phrase.words.length > 0}
 		<div class="footer">

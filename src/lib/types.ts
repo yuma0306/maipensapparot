@@ -16,6 +16,7 @@ export type Phrase = {
 	fieldId: string;
 } & Partial<{
 	phrase: string;
+	ipa: string;
 	meaning: string;
 	words: Word[];
 }>;
